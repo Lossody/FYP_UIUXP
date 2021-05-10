@@ -1,0 +1,5 @@
+Input Reference for back end team
+
+Username's Box ID => "user_name"
+Password's Box ID => "pass_word"
+Submit Button ID => "submit_button"
