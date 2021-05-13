@@ -4,19 +4,10 @@
         <title>{{title}}</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/Login.css')}}"/>
+        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/login.css')}}"/>
     </head>
     <body>
         {% block content %}
         {% endblock %}
-        {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    {% for category, message in messages %}
-                        <div class = "bottom_container col-12 bg-danger mt-3">
-                            <p class="text-center">{{message}}</p>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
     </body>
 </html>
