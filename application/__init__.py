@@ -7,15 +7,15 @@ import os
 
 app = Flask(__name__)
 
-# if "Testing" in os.environ:
-#     app.config.from_envvar('TESTING')
-#     print("Using configuration for TESTING.")
-# elif "DEVELOPMENT" in os.environ:
-#     app.config.from_envvar('DEVELOPMENT')
-#     print("Using configuration for DEVELOPMENT.")
-# else:
-#     app.config.from_pyfile('config_test.cfg')
-#     #app.config.from_pyfile('config_dply.cfg')
+if "Testing" in os.environ:
+    app.config.from_envvar('TESTING')
+    print("Using configuration for TESTING.")
+elif "DEVELOPMENT" in os.environ:
+    app.config.from_envvar('DEVELOPMENT')
+    print("Using configuration for DEVELOPMENT.")
+else:
+    app.config.from_pyfile('config_test.cfg')
+    #app.config.from_pyfile('config_dply.cfg')
 
 # Calling out heroku on app
 #heroku = Heroku(app)
