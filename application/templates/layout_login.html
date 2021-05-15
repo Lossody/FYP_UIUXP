@@ -2,8 +2,8 @@
 <html lang = "en">
     <head>
         <title>{{title}}</title>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- Latest compiled and minified CSS
+        <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
         <!-- Form CSS -->
         <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/login.css')}}"/>
         <!-- Google Font -->
@@ -12,7 +12,18 @@
         <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
     </head>
     <body>
+        <h1> Login </h1>
         {% block content %}
         {% endblock %}
+        <!-- This line generate the error -->
+        {% with messages = get_flashed_messages(with_categories=true)%}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class = "login_error_container">
+                                <p id = "login_error">{{message}}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
     </body>
 </html>

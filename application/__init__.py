@@ -21,6 +21,11 @@ else:
 #heroku = Heroku(app)
 
 # Instantiate SQLAlchemy to handle db process
+db = SQLAlchemy(app)
+
+
+
+
 # joblib_file = "./application/static/Fetus_Predictus.pkl"
 # ai_model = joblib.load(joblib_file)
 
