@@ -4,14 +4,14 @@
         <!-- Login Box -->
         <div class = "login_box">
             <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="100%" height="120">
-            <form name = "form_login" action = "/main" method = "POST" >
+            <form name = "form_login" action = "/login_complete" method = "POST">
                 {{ form.hidden_tag() }}
                 <!-- Username field -->
-                <p>{{ form.name.label }}:</p>
+                <p>Username</p>
                 {{ form.name(id="user_name",placeholder="Enter Username") }}
                 <!--<input type="text" name="" placeholder="Enter Username" id = "user_name">-->
                 <!-- Password field -->
-                <p>{{ form.password.label }}:</p>
+                <p>Password</p>
                 {{ form.password(id="pass_word",placeholder="Enter Password") }}
                 <!--<input type="password" name="" placeholder = "Enter Password" id = "pass_word">-->
                 <!-- Submit button -->
