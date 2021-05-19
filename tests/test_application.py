@@ -16,7 +16,7 @@ def test_api_register(client,api_register,capsys):
         data1 = {
             'username': api_register[0],
             'password': api_register[1],
-            'position': api_register[2],
+            'position': api_register[2]
         }
         response = client.post("/api/register_complete",
         data = json.dumps(data1),

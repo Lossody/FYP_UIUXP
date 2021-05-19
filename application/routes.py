@@ -64,14 +64,15 @@ def loginPageComplete():
             return redirect(url_for("loginPage"))
 
 # This is the register section, only the CEO and Secretary can access it
-@app.route('/register')
+@app.route('/register',methods = ['GET'])
 def registerPage():
     if "user" in session:
         user = session['user']
         # This section check if the user is a secretary or CEO
-        position = getRole(user)
-        print("Position = ", position)
-        if position == "C" or position == "S" or position == "ER":
+        name_check = Login_Entry.query.filter_by(id = user).first()
+        role = name_check.position
+        print("Role:",role)
+        if role == "C" or role == "S" or role == "ER":
             form = RegisterForm()
             return render_template('register.html',form = form, title = "Registeration")
         else:
@@ -114,12 +115,13 @@ def registerPageComplete():
 def getRole(ids):
     try:
         entries = Login_Entry.query.filter_by(id = int(ids))
-        #print(entries)
-        return entries.position
+        print(entries)
+        return entries
     except Exception as error:
         db.session.rollback()
         flash(error,"danger") 
         return 0
+
 # Adds new user in the user table
 def addUser(login_entry):
     try:
@@ -143,9 +145,11 @@ def api_register():
     data = request.get_json()
     username = data['username']
     password = data['password']
+    position = data['position']
     new_user = Login_Entry(
         username = username,
-        password = password
+        password = password,
+        position = position
     )
     result = add_login_entry(new_user)
     #print(result)
