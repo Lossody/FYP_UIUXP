@@ -83,7 +83,30 @@ def registerPage():
 
 @app.route('/register_complete')
 def registerPageComplete():
-    pass
+    form = RegisterForm()
+    if request.method == "POST":
+        print(form)
+        if form.validate_on_submit() == True:
+            username = form.username.data
+            checker = Login_Entry.query.filter_by(username = username).first()
+            if checker is None:
+                print("YES")
+                username = form.username.data
+                password = form.password.data
+                new_user = Login_Entry( username = username, password = password )
+                add_login_entry(new_user)
+                flash("Account Register Succesfully!","success")
+                return render_template('register.html',form = form)
+            else:
+                
+                flash("Account Already Registered!","danger")
+                return render_template('register.html',form = form)
+        else:
+            username = form.username.data
+            password = form.password.data
+            print(username,password)
+            flash("Error creating an Account.","danger")
+            return render_template('register.html',form = form)
 
 
 # This function goes together with the registeration page
