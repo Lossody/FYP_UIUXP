@@ -1,0 +1,25 @@
+{% extends "layout_login.html" %}
+{% block content %}
+<!-- Let this be the body of the webpage -->
+<!-- Login Box -->
+<div class = "login_box">
+    <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="100%" height="120">
+    <form name = "form_login" action = "/register_complete" method = "POST">
+        {{ form.hidden_tag() }}
+        <!-- Username field -->
+        <p>Username</p>
+        {{ form.name(id="user_name",placeholder="Enter Username") }}
+        <!--<input type="text" name="" placeholder="Enter Username" id = "user_name">-->
+        <!-- Password field -->
+        <p>Password</p>
+        {{ form.password(id="pass_word",placeholder="Enter Password") }}
+        <!--<input type="password" name="" placeholder = "Enter Password" id = "pass_word">-->
+        <!-- Submit button -->
+        {{ form.submit(id="submit_button") }}
+        <!--<input type="submit" id = "submit_button">-->
+        
+        <br>
+        <br> 
+    </form>
+</div>
+{% endblock %}

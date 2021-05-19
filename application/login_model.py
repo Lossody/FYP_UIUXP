@@ -7,3 +7,4 @@ class Login_Entry(db.Model):
     id = db.Column(db.Integer,primary_key = True, autoincrement = True)
     username = db.Column(db.String)
     password = db.Column(db.String)
+    position = db.Column(db.String)
