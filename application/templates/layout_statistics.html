@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>{{title}}</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- Form CSS -->
+        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/statistics.css')}}"/>
+        <!-- Google Font -->
+        <!-- Following Webpage font-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        <div class = "logo">
+            <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="25%" height="120">
+        </div>
+
+        <div class = "container mt-5">
+            <div class = "row">
+                <div class ="col-md-4"></div>
+                <div class ="col-md-4">
+                    <h1>Statistics Page</h1>  <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+                <div class ="col-md-4"></div>
+            </div>
+        </div>
+        
+
+        <div class = "container mt-5">
+            <div class = "row">
+                <div class = "col-md-4">
+                    <img src="{{ url_for('static', filename='/images/Statistics_graph1.png') }}">
+                </div>
+                <div class = "col-md-8">
+                    <h2>'Bonus'</h2><br><h5 class = "text-left">is the most frequently searched word this month!</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class = "container mt-5">
+            <div class = "row mt-5">
+                <div class = "col-md-7">
+                    <h3 class = "text-center">Topics that need clarification</h3><br><h5 class = "text-center">&#8226;Insurance is the most misunderstood topic</h5>
+                </div>
+                <div class = "col-md-5">
+                    <img src="{{ url_for('static', filename='/images/Statistics_graph2.png') }}">
+                </div>
+            </div>
+        </div>
+
+
+        <div class = "container mt-5">
+            <div class = "row mt-5">
+                <div class = "col-md-6">
+                   <h3>Website User Experience</h3><br><img src="{{ url_for('static', filename='/images/Statistics_graph3.png') }}">
+                </div>
+                <div class = "col-md-6">
+                    <div class = "spacer">
+                        <h3 class = "ml-4">Word Cloud Feedback</h3>
+                    </div>
+                    <div class = "row">
+                        <div class = "col-md-3">
+                            <h4 class="text-left">Positive:</h4>
+                        </div>
+                        <div class = "col-md-9">
+                            <img src="{{ url_for('static', filename='/images/Statistics_graph4.png') }}"width="500" height="220">
+                        </div>
+                    </div>
+                    <div class = "row">
+                        <div class = "col-md-3">
+                            <h4 class="text-left">Negative:</h4>
+                        </div>
+                        <div class = "col-md-9">
+                            <img src="{{ url_for('static', filename='/images/Statistics_graph5.png') }}"width="500" height="220">
+                        </div>
+                    </div>
+                       
+                   
+                </div>
+            </div>
+        </div>
+
+
+
+        
+        {% block content %}
+        {% endblock %}
+        <!-- This line generate the error -->
+        {% with messages = get_flashed_messages(with_categories=true)%}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                        <div class = "text-center text-danger">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+    </body>
+</html>

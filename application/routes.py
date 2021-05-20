@@ -28,7 +28,7 @@ def mainPage():
     if "user" in session:
         user = session["user"]
         print(user)
-        return render_template('Feedback.html',title ="Main")
+        return render_template('layout_statistics.html',title ="Main")
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
