@@ -135,7 +135,23 @@ def addUser(login_entry):
         flash(error,"danger")
 
 
-
+# This section shows the employee table, only CEO and Secretary can see it
+@app.route('/viewer')
+def viewerPage():
+    if "user" in session:
+        user = session['user']
+        # This section check if the user is a secretary or CEO
+        name_check = Login_Entry.query.filter_by(id = user).first()
+        role = name_check.position
+        print("Role:",role)
+        if role == "C" or role == "S":
+            return render_template()
+        else:
+            flash("Permission denied, seek higher up for assistance.")
+            return redirect(url_for("mainPage")) 
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
 
 #=================================================================================
 #==============================API for testing====================================
@@ -159,6 +175,7 @@ def api_register():
         'id' : result
     })
 
+# This function add user into database
 def add_login_entry(login_entry):
     try:
         db.session.add(login_entry)
@@ -167,3 +184,14 @@ def add_login_entry(login_entry):
     except Exception as error:
         db.session.rollback()
         flash(error,"danger")
+
+# This function shows data from the database
+def get_entries(ids):
+    try:
+        entries = Login_Entry.query.filter_by(user_id = int(ids))
+        #print(entries)
+        return entries
+    except Exception as error:
+        db.session.rollback()
+        flash(error,"danger") 
+        return 0
