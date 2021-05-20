@@ -2,7 +2,7 @@
 {% block content %}
 <!-- Let this be the body of the webpage -->
 <!-- Login Box -->
-<div class = "login_box">
+<div class = "register_box">
     <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="100%" height="120">
     <form name = "form_login" action = "/register_complete" method = "POST">
         {{ form.hidden_tag() }}
@@ -14,8 +14,10 @@
         <p>Password</p>
         {{ form.password(id="pass_word",placeholder="Enter Password") }}
         <!--<input type="password" name="" placeholder = "Enter Password" id = "pass_word">-->
+        <p>Role:</p> 
+        {{ form.position(id="position")}}
         <!-- Submit button -->
-        {{ form.submit(id="submit_button") }}
+        {{ form.register(id="register_button") }}
         <!--<input type="submit" id = "submit_button">-->
         
         <br>

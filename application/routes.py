@@ -64,7 +64,7 @@ def loginPageComplete():
             return redirect(url_for("loginPage"))
 
 # This is the register section, only the CEO and Secretary can access it
-@app.route('/register',methods = ['GET'])
+@app.route('/register',methods = ['GET','POST'])
 def registerPage():
     if "user" in session:
         user = session['user']
@@ -82,26 +82,28 @@ def registerPage():
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
-@app.route('/register_complete')
+@app.route('/register_complete',methods = ['GET','POST'])
 def registerPageComplete():
     form = RegisterForm()
     if request.method == "POST":
         print(form)
         if form.validate_on_submit() == True:
-            username = form.username.data
+            username = form.name.data
             checker = Login_Entry.query.filter_by(username = username).first()
+            # Check if the user exists in the data base
             if checker is None:
                 print("YES")
-                username = form.username.data
+                username = form.name.data
                 password = form.password.data
-                new_user = Login_Entry( username = username, password = password )
+                position = form.position.data
+                new_user = Login_Entry( username = username, password = password , position = position)
                 add_login_entry(new_user)
                 flash("Account Register Succesfully!","success")
-                return render_template('register.html',form = form)
+                return render_template('register.html',form = form ,title="Registeration")
             else:
                 
                 flash("Account Already Registered!","danger")
-                return render_template('register.html',form = form)
+                return render_template('register.html',form = form ,title="Registeration")
         else:
             username = form.username.data
             password = form.password.data
