@@ -1,4 +1,4 @@
-{% extends "Layout_History.html" %}
+{% extends "layout_viewer.html" %}
 {% block content %}
 <div class="overflow-x">
 <table class="table table-hover mt-5">
@@ -15,25 +15,20 @@
         {% for entry in entries %}
       <tr>
         <td class="indexing">{{ loop.index }}</td>
-        <td>{{ entry.FHR }}</td>
-        <td>{{ entry.no_acceleration }}</td>
-        <td>{{ entry.fetal_movement }}</td>
-        <td>{{ entry.no_uterine_contractions }}</td>
-        <td>{{ entry.light_deceleration }}</td>
-        <td>{{ entry.severe_deceleration }}</td>
-        <td>{{ entry.prolongued_deceleration }}</td>
-        <td>{{ entry.abnormal_short_term_variability }}</td>
-        <td>{{ entry.mean_value_of_short_term_variability }}</td>
-        <td>{{ entry.percentage_of_time_with_abnormal_long_term_variability }}</td>
-        <td>{{ entry.mean_value_of_long_term_variability }}</td>
-        <td>{{ entry.prediction }}</td>
-        <td>{{ entry.predicted_on }}</td>
+        <td>{{ entry.username }}</td>
+        <td>{{ entry.position }}</td>
         <td>
           <form name="frmRemoveEntry" action="/remove" method="post" 
                 novalidate> 
           <input type="hidden" name="id" value="{{entry.id}}">
           <input type="submit" class="form-control btn-danger" 
                 value="Remove">
+          </form>
+        </td>
+        <td>
+          <form name="UpdateEntry" action="/updater" method="GET" novalidate>
+          <input type="hidden"name="id_update" value="{{entry.id}}">
+          <input type="submit" class="form-control btn-info" value="Update">
           </form>
         </td>
       </tr>

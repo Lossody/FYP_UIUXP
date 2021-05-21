@@ -3,6 +3,7 @@ from flask import render_template , request , flash , redirect , url_for , sessi
 # This line import the login form and the register form
 from application.form_login import LoginForm
 from application.form_register import RegisterForm
+from application.form_update import UpdateForm
 # This line import the login table
 from application.login_model import Login_Entry
 # This line import sqlite database
@@ -63,7 +64,7 @@ def loginPageComplete():
             flash("Please login first!","danger")
             return redirect(url_for("loginPage"))
 
-# This is the register section, only the CEO and Secretary can access it
+# This is the register section, only the CEO and Secretary and employer can access it
 @app.route('/register',methods = ['GET','POST'])
 def registerPage():
     if "user" in session:
@@ -105,11 +106,14 @@ def registerPageComplete():
                 flash("Account Already Registered!","danger")
                 return render_template('register.html',form = form ,title="Registeration")
         else:
-            username = form.username.data
+            username = form.name.data
             password = form.password.data
             print(username,password)
             flash("Error creating an Account.","danger")
             return render_template('register.html',form = form)
+    else:
+        return redirect(url_for("mainPage"))
+
 
 
 # This function goes together with the registeration page
@@ -145,13 +149,114 @@ def viewerPage():
         role = name_check.position
         print("Role:",role)
         if role == "C" or role == "S":
-            return render_template()
+            return render_template('viewer.html',entries = get_entries())
         else:
             flash("Permission denied, seek higher up for assistance.")
             return redirect(url_for("mainPage")) 
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
+
+# This section removes the employee account, online CEO and secretary can use this function
+@app.route('/remove',methods=['GET','POST'])
+def remove():
+    if "user" in session:
+        user = session['user']
+        # This section check if the user is a secretary or CEO
+        name_check = Login_Entry.query.filter_by(id = user).first()
+        role = name_check.position
+        if role == "C" or role == "S":
+            if request.method == "POST":
+                req = request.form
+                id = req['id']
+                # Check if the entry is empty
+                if Login_Entry.query.get(id) != None:
+                    # If the entry is not empty, check if it is the CEO
+                    remove_role = Login_Entry.query.get(id)
+                    if remove_role.position == "C":
+                        flash("You cannot remove the CEO!")
+                        return render_template("viewer.html",entries = get_entries(),index = True)
+                    else:
+                        remove_entry(id)
+                        return render_template("viewer.html",entries = get_entries(),index = True)
+                else:
+                    return render_template("viewer.html",entries= get_entries(), index = True)
+            else:
+                return redirect(url_for('historyPage'))
+        else:
+            flash("Permission denied, seek higher up for assistance.")
+            return redirect(url_for("mainPage"))
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+@app.route('/updater',methods=['GET','POST'])
+def updatePage():
+    if "user" in session:
+        get_id = request.args.get('id_update')
+        form = UpdateForm()
+        # Check which position is the user for logged in
+        user = session['user']
+        name_check = Login_Entry.query.filter_by(id = user).first()
+        role = name_check.position
+        # Checks the role of the person who is going to have their profile updated
+        #req = request.form
+        #id = req['id']
+        result = Login_Entry.query.filter_by(id = get_id).first()
+        role_change = result.position
+        role_id = result.id
+        # If the person is a CEO
+        if role == "C":
+            return render_template('update.html',entry = role_id,form = form)
+        # If the person is a secretary
+        elif role == "S":
+            if role_change == "C":
+                flash("Permission denied, seek higher up for assistance.")
+                return redirect(url_for("viewerPage"))
+            else:
+                return render_template('update.html',entry = role_id,form = form)
+        else:
+            flash("Permission denied, seek higher up for assistance.")
+            return redirect(url_for("mainPage"))
+        
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+@app.route('/update',methods=['GET','POST'])
+def update():
+    if "user" in session:
+        form = UpdateForm()
+        if request.method == "POST":
+            if form.validate_on_submit() == True:
+                emp_id = form.emp_id.data
+                username = form.name.data
+                password = form.password.data
+                position = form.position.data
+                print("Error check: ",emp_id)
+                print(emp_id , username , password , position)
+                update_entry(emp_id,username,password,position)
+                flash("Update Successful!")
+                return redirect(url_for("viewerPage"))
+            else:
+                return redirect(url_for("viewerPage"))
+
+        else:
+            return redirect(url_for("viewerPage"))
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+
+
+
+
+
+
+
+
+
+
 
 #=================================================================================
 #==============================API for testing====================================
@@ -186,12 +291,35 @@ def add_login_entry(login_entry):
         flash(error,"danger")
 
 # This function shows data from the database
-def get_entries(ids):
+def get_entries():
     try:
-        entries = Login_Entry.query.filter_by(user_id = int(ids))
+        entries = Login_Entry.query.all()
         #print(entries)
         return entries
     except Exception as error:
         db.session.rollback()
         flash(error,"danger") 
         return 0
+
+# This function removes user from database
+def remove_entry(id):
+    try:
+        entry = Login_Entry.query.get(id)
+        db.session.delete(entry)
+        db.session.commit()
+    except Exception as error:
+        db.session.rollback()
+        flash(error,"danger")
+
+
+# This function update user
+def update_entry(id,username,password,position):
+    try:
+        entry = Login_Entry.query.get(id)
+        entry.username = username
+        entry.password = password
+        entry.position = position
+        db.session.commit()
+    except Exception as error:
+        db.session.rollback()
+        flash(error,"danger")
