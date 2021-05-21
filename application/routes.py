@@ -29,7 +29,7 @@ def mainPage():
     if "user" in session:
         user = session["user"]
         print(user)
-        return render_template('layout_statistics.html',title ="Main")
+        return render_template('statistics.html',title ="Main")
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
@@ -75,7 +75,7 @@ def registerPage():
         print("Role:",role)
         if role == "C" or role == "S" or role == "ER":
             form = RegisterForm()
-            return render_template('register.html',form = form, title = "Registeration")
+            return render_template('register.html',form = form, title = "Registration")
         else:
             flash("Permission denied, seek higher up for assistance.")
             return redirect(url_for("mainPage"))
