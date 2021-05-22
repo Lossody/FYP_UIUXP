@@ -163,8 +163,11 @@ def remove():
     if "user" in session:
         user = session['user']
         # This section check if the user is a secretary or CEO
-        name_check = Login_Entry.query.filter_by(id = user).first()
-        role = name_check.position
+        try:
+            name_check = Login_Entry.query.filter_by(id = user).first()
+            role = name_check.position
+        except:
+            return render_template("viewer.html",entries = get_entries(),index = True)
         if role == "C" or role == "S":
             if request.method == "POST":
                 req = request.form
