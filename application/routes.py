@@ -19,7 +19,7 @@ db.create_all()
 def loginPage():
     if "user" not in session:
         form = LoginForm()
-        return render_template('login.html', title = "Login" , form = form)
+        return render_template('login.html', title="Login" , form=form)
     else:
         return redirect(url_for("mainPage"))
 
@@ -29,12 +29,12 @@ def mainPage():
     if "user" in session:
         user = session["user"]
         print(user)
-        return render_template('feedback.html',title ="Main")
+        return render_template('statistics.html', title="Main")
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
-@app.route('/login_complete',methods = ['GET','POST'])
+@app.route('/login_complete', methods = ['GET','POST'])
 def loginPageComplete():
     if "user" in session:
         return redirect(url_for("mainPage"))
