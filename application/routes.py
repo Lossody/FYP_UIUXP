@@ -100,11 +100,11 @@ def registerPageComplete():
                 new_user = Login_Entry( username = username, password = password , position = position)
                 add_login_entry(new_user)
                 flash("Account Register Successfully!","success")
-                return render_template('register.html',form = form ,title="Registeration")
+                return render_template('register.html',form = form ,title="Registration")
             else:
                 
                 flash("Account Already Registered!","danger")
-                return render_template('register.html',form = form ,title="Registeration")
+                return render_template('register.html',form = form ,title="Registration")
         else:
             username = form.name.data
             password = form.password.data
@@ -116,7 +116,7 @@ def registerPageComplete():
 
 
 
-# This function goes together with the registeration page
+# This function goes together with the registration page
 # It checks if the user is the CEO or Secretary
 def getRole(ids):
     try:
