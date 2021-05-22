@@ -29,7 +29,7 @@ def mainPage():
     if "user" in session:
         user = session["user"]
         print(user)
-        return render_template('statistics.html',title ="Main")
+        return render_template('feedback.html',title ="Main")
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
@@ -261,16 +261,11 @@ def update():
         return redirect(url_for("loginPage"))
 
 
-
-
-
-
-
-
-
-
-
-
+# This line of code allow people to logout
+@app.route('/signout')
+def signout():
+    session.pop("user",None)
+    return redirect(url_for('loginPage'))
 #=================================================================================
 #==============================API for testing====================================
 #=================================================================================
