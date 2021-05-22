@@ -99,7 +99,7 @@ def registerPageComplete():
                 position = form.position.data
                 new_user = Login_Entry( username = username, password = password , position = position)
                 add_login_entry(new_user)
-                flash("Account Register Succesfully!","success")
+                flash("Account Register Successfully!","success")
                 return render_template('register.html',form = form ,title="Registeration")
             else:
                 
