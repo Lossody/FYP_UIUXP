@@ -145,8 +145,13 @@ def viewerPage():
     if "user" in session:
         user = session['user']
         # This section check if the user is a secretary or CEO
-        name_check = Login_Entry.query.filter_by(id = user).first()
-        role = name_check.position
+        try:
+            name_check = Login_Entry.query.filter_by(id = user).first()
+            role = name_check.position
+        except:
+            session.pop('user',None)
+            flash("Your account cannot be found!")
+            return redirect(url_for("loginPage"))
         print("Role:",role)
         if role == "C" or role == "S":
             return render_template('viewer.html',entries = get_entries())
@@ -163,15 +168,16 @@ def remove():
     if "user" in session:
         user = session['user']
         # This section check if the user is a secretary or CEO
-        try:
-            name_check = Login_Entry.query.filter_by(id = user).first()
-            role = name_check.position
-        except:
-            return render_template("viewer.html",entries = get_entries(),index = True)
+        name_check = Login_Entry.query.filter_by(id = user).first()
+        role = name_check.position
         if role == "C" or role == "S":
             if request.method == "POST":
                 req = request.form
                 id = req['id']
+                print("User ID = ",user)
+                print("Remove ID = ",id)
+                print(user is id)
+                print(type(user), type(id))
                 # Check if the entry is empty
                 if Login_Entry.query.get(id) != None:
                     # If the entry is not empty, check if it is the CEO
@@ -180,7 +186,7 @@ def remove():
                     if remove_role.position == "C":
                         flash("You cannot remove the CEO!")
                         return render_template("viewer.html",entries = get_entries(),index = True)
-                    elif user == id:
+                    elif user == int(id):
                         flash("You cannot remove yourself!")
                         return render_template("viewer.html",entries = get_entries(),index = True)
                     else:
