@@ -1,3 +1,16 @@
+.logo {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 15px;
+}
+
+
+.logo > img{
+    margin-left:37%;
+ 
+}
+
 
 
 h1 {
@@ -41,16 +54,8 @@ h5 {
     margin-left: 50px;
 }
 
-.logo {
-    width: 100%;
-    height: 200px;
-    position: absolute;
-    top: 15px;
+
+.middle-spacer{
+    margin-top:100px;
+    margin-bottom:100px;
 }
-
-
-.logo > img{
-    margin-left:37%;
- 
-}
-
