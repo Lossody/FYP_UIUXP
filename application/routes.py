@@ -173,8 +173,12 @@ def remove():
                 if Login_Entry.query.get(id) != None:
                     # If the entry is not empty, check if it is the CEO
                     remove_role = Login_Entry.query.get(id)
+                    # Check if the person removing it is themself
                     if remove_role.position == "C":
                         flash("You cannot remove the CEO!")
+                        return render_template("viewer.html",entries = get_entries(),index = True)
+                    elif user == id:
+                        flash("You cannot remove yourself!")
                         return render_template("viewer.html",entries = get_entries(),index = True)
                     else:
                         remove_entry(id)
