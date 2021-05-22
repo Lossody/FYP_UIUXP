@@ -5,8 +5,16 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">      
     <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/viewer.css')}}"/>
+    <!-- Google Font -->
+    <!-- Following Webpage font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+    <!-- Nav Bar CSS-->
+    <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/nav.css')}}">
 </head>
 <body> 
+    {% include "includes/nav.html" %}
+    <h1> User Table </h1>
     {% block content %}
     {% endblock %}
     {% with messages = get_flashed_messages(with_categories=true)%}

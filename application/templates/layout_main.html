@@ -5,10 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!-- Form CSS -->
-        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/register.css')}}"/>
-        <!-- CSS for error showing -->
-        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/error.css')}}"/>
+        <!-- Main CSS -->
+        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/main.css')}}"/>
         <!-- Google Font -->
         <!-- Following Webpage font-->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +16,6 @@
     </head>
     <body>
         {% include "includes/nav.html" %}
-        <h1> Registeration </h1>
         {% block content %}
         {% endblock %}
         <!-- This line generate the error -->

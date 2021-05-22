@@ -1,7 +1,7 @@
 {% extends "layout_statistics.html" %}
 {% block content %}
 <div class = "logo">
-    <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="25%" height="120">
+    <img src="{{ url_for('static', filename='images/Logo.png') }}"width="25%" height="120">
 </div>
 
 <div class = "container mt-5">
@@ -14,34 +14,40 @@
     </div>
 </div>
 
+<div class = "middle-spacer"></div>
 
 <div class = "container mt-5">
     <div class = "row">
-        <div class = "col-md-4">
-            <img src="{{ url_for('static', filename='/images/Statistics_graph1.png') }}">
+        <div class = "col-md-5">
+            <img src="{{ url_for('static', filename='images/Statistics_graph1.png') }}">
         </div>
-        <div class = "col-md-8">
+        <div class = "col-md-7">
             <h2>'Bonus'</h2><br><h5 class = "text-left">is the most frequently searched word this month!</h5>
         </div>
     </div>
 </div>
 
+
+<div class = "middle-spacer"></div>
+
 <div class = "container mt-5">
     <div class = "row mt-5">
         <div class = "col-md-7">
-            <h3 class = "text-center">Topics that need clarification</h3><br><h5 class = "text-center">&#8226;Insurance is the most misunderstood topic</h5>
+            <h3 class = "text-center">Topics that need clarification</h3><br><h5 class = "text-center">&#8226;Insurance is the most misunderstood topic</h5><br>
+            <h5 class = "text-center">&#8226;T&C has relatively lower doubts among the employees as compared to other topics</h5>
         </div>
         <div class = "col-md-5">
-            <img src="{{ url_for('static', filename='/images/Statistics_graph2.png') }}">
+            <img src="{{ url_for('static', filename='images/Statistics_graph2.png') }}">
         </div>
     </div>
 </div>
 
+<div class = "middle-spacer"></div>
 
-<div class = "container mt-5">
+<div class = "container">
     <div class = "row mt-5">
         <div class = "col-md-6">
-           <h3>Website User Experience</h3><br><img src="{{ url_for('static', filename='/images/Statistics_graph3.png') }}">
+           <h3>Website User Experience</h3><br><img src="{{ url_for('static', filename='images/Statistics_graph3.png') }}">
         </div>
         <div class = "col-md-6">
             <div class = "spacer">
@@ -52,15 +58,15 @@
                     <h4 class="text-left">Positive:</h4>
                 </div>
                 <div class = "col-md-9">
-                    <img src="{{ url_for('static', filename='/images/Statistics_graph4.png') }}"width="500" height="220">
+                    <img src="{{ url_for('static', filename='images/Statistics_graph4.png') }}"width="430" height="170">
                 </div>
             </div>
-            <div class = "row">
+            <div class = "row mt-4">
                 <div class = "col-md-3">
                     <h4 class="text-left">Negative:</h4>
                 </div>
                 <div class = "col-md-9">
-                    <img src="{{ url_for('static', filename='/images/Statistics_graph5.png') }}"width="500" height="220">
+                    <img src="{{ url_for('static', filename='images/Statistics_graph5.png') }}"width="430" height="170">
                 </div>
             </div>
                
