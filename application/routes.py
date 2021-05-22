@@ -261,16 +261,11 @@ def update():
         return redirect(url_for("loginPage"))
 
 
-
-
-
-
-
-
-
-
-
-
+# This line of code allow people to logout
+@app.route('/signout')
+def signout():
+    session.pop("user",None)
+    return redirect(url_for('loginPage'))
 #=================================================================================
 #==============================API for testing====================================
 #=================================================================================
