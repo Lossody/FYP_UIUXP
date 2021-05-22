@@ -1,217 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center
+}
 
-/*Pop up*/
+.rating>input {
+  display: none
+}
+
+.rating>label {
+  position: relative;
+  width: 1em;
+  font-size: 2vw;
+  color: #FFD600;
+  cursor: pointer
+}
+
+.rating>label::before {
+  content: "\2605";
+  position: absolute;
+  opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+  opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+  opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+  opacity: 0.4
+}
+
 body {
- background: white;
- font-family: raleway;
- color: white;
- margin: 0;
+  background: #222225;
+  color: white
 }
 
-.popup .content {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-150%) scale(0);
-width: 300px;
-height: 450px;
-z-index: 2;
-text-align: center;
-padding: 20px;
-border-radius: 20px;
-background: #727272;
-box-shadow:  10px 10px 30px #7a7a7a, 
-            -10px -10px 38px #7a7a7a;
-z-index: 1;
-}
-
-.popup .close-btn {
-position: absolute;
-right: 20px;
-top: 20px;
-width: 30px;
-height: 30px;
-font-size: 30px;
-border-radius: 50%;
-padding: 2px 5px 7px 5px;
-background: rgba(255, 0, 0, 0.5);
-box-shadow: 1px 1px 3px #680000;
-}
-
-.popup.active .content {
-transition: all 300ms ease-in-out;
-transform: translate(-50%,-50%) scale(1);
+h1,
+p {
+  text-align: center
 }
 
 h1 {
-text-align: center;
-font-size: 30px;
-font-weight: 600;
-padding-top: 20px;
-padding-bottom: 10px;
+  margin-top: 150px
 }
 
-a {
-font-weight: 600;
-color: rgb(29, 28, 28);
+p {
+  font-size: 1.2rem
 }
 
-.first-button {
-color: rgb(255, 255, 255);
-font-size: 18px;
-font-weight: 500;
-padding: 30px 50px;
-border-radius: 40px;
-border: none;
-position: absolute;
-top: 50%;
-left: 20%;
-transform: translate(-50%, -50%);
-background: #747474;
-box-shadow:  10px 10px 30px #7a7a7a, 
-            -10px -10px 38px #7a7a7a;
-transition: box-shadow .35s ease !important;
-outline: none;
-}
-
-.first-button:active {  
-background: linear-gradient(145deg, #3d3d3d, #525252);
-box-shadow:  10px 10px 30px #7a7a7a, 
-            -10px -10px 38px #7a7a7a;
-border: none;
-}
-
-.second-button {
-color: rgb(61, 61, 61);
-font-size: 18px;
-font-weight: 500;
-margin-top: 20px;
-padding: 20px 30px;
-border-radius: 40px;
-border: none;
-background: #ffffff;
-box-shadow:  10px 10px 30px #7a7a7a, 
-            -10px -10px 38px #7a7a7a;
-transition: box-shadow .35s ease !important;
-outline: none;
-}
-
-.second-button:active{
-background: linear-gradient(145deg,#222222, #292929);
-box-shadow: 5px 5px 10px #262626, -5px -5px 10px #262626;
-border: none;
-outline: none;
-}
-
-p{
-color: #bfc0c0;
-padding: 20px;
-}
-
-
-/*5 star rating*/
-*{
-    margin: 0;
-    padding: 0;
-}
-.rate {
-    float: left;
-    height: 46px;
-
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
-
-/*Drop down*/
-html {
-    font-size: 62.5%;
-    font-family: "Poppins", sans-serif;
+@media only screen and (max-width: 600px) {
+  h1 {
+      font-size: 14px
   }
-  * {
-    box-sizing: border-box;
-  }
-  :root {
-    --primary: #8a57e9;
-    --secondary: #4c75e6;
-  }
-  body {
-    width: 100%;
-    height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5rem;
+  p {
+      font-size: 12px
   }
-  .dropdown {
-    position: relative;
-  }
-  .dropdown:hover .dropdown-list {
-    opacity: 1;
-    visibility: visible;
-  }
-  .dropdown-select {
-    padding: 1.5rem;
-    border-radius: 4px;
-    background-color: white;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 1.6rem;
-    cursor: pointer;
-  }
-  .dropdown-list {
-    border-radius: 4px;
-    background-color: black;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s linear, visibility 0.2s linear;
-    transform: translateY(10px);
-  }
-  .dropdown-list:before {
-    content: "";
-    width: 100%;
-    height: 10px;
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateY(-100%);
-  }
-  .dropdown-list__item {
-    padding: 1rem;
-    font-size: 1.4rem;
-  }
+}

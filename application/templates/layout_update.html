@@ -11,8 +11,11 @@
     <!-- Following Webpage font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+    <!-- Nav Bar CSS-->
+    <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/nav.css')}}">
 </head>
 <body> 
+    {% include "includes/nav.html" %}
     <h1> Update </h1>
     {% block content %}
     {% endblock %}

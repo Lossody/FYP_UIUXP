@@ -1,0 +1,17 @@
+<nav class="navbar navbar-light bg-white" id = "navbaring">
+    <div class="container-fluid">
+        <!-- Nav bar header-->
+        <div class="navbar-header">
+            <a class="navbar-brand ml-5" href="/main"><img src="{{ url_for('static', filename='/images/Logo.png') }}"
+                height = "100px"></a>
+        </div>
+        <!-- UL Class -->
+        <ul class = "navbar-nav flex-row">
+            <li class = "nav-item mr-5"><a href="/main"><h6 class="text-dark">Main Page</h6></a></li>
+            <li class = "nav-item mr-5"><a href="/statistic"><h6 class="text-dark">Statistic Page</h6></a></li>
+            <li class = "nav-item mr-5"><a href="/register"><h6 class="text-dark">Registeration Page</h6></a></li>
+            <li class = "nav-item mr-5"><a href="/viewer"><h6 class="text-dark">User Page</h6></a></li>
+            <li class = "nav-item mr-5"><a href="/logout"><h6 class="text-dark">Sign Out</h6></a></li>
+        </ul>
+    </div>
+</nav>
