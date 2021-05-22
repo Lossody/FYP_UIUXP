@@ -3,7 +3,7 @@
 <!-- Let this be the body of the webpage -->
         <!-- Login Box -->
         <div class = "login_box">
-            <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="100%" height="120">
+            <img src="{{ url_for('static', filename='images/Logo.png') }}"width="100%" height="120">
             <form name = "form_login" action = "/login_complete" method = "POST">
                 {{ form.hidden_tag() }}
                 <!-- Username field -->
