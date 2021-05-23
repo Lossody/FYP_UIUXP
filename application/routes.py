@@ -262,7 +262,7 @@ def update():
 
 
 # This line of code allow people to logout
-@app.route('/signout')
+@app.route('/logout')
 def signout():
     session.pop("user",None)
     return redirect(url_for('loginPage'))
