@@ -23,13 +23,35 @@ def loginPage():
     else:
         return redirect(url_for("mainPage"))
 
-# This section is for the main page, any people can access it.
+# This section is for the Main page, any people can access it.
 @app.route('/main')
 def mainPage():
     if "user" in session:
         user = session["user"]
         print(user)
         return render_template('main.html', title="Main")
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+# This section is for the Answers page, any people can access it.
+@app.route('/answers')
+def answersPage():
+    if "user" in session:
+        user = session["user"]
+        print(user)
+        return render_template('answers.html', title="Answers")
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+# This section is for the More Answers page, any people can access it.
+@app.route('/moreanswers')
+def moreanswersPage():
+    if "user" in session:
+        user = session["user"]
+        print(user)
+        return render_template('moreanswers.html', title="More Answers")
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))

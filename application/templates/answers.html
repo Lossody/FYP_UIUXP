@@ -1,6 +1,6 @@
-{% extends "layout_main.html" %}
+{% extends "layout_answers.html" %}
 {% block content %}
-<!-- Let this be the body of the webpage -->
+
 <div class="a">
     <h3>Question & Answer</h3>
     <br>
@@ -14,10 +14,25 @@
 <div>
     <h4 class="b">Query:</h4>
     <br>
-    <form class="query" action="/answers" style="margin:auto;max-width:1500px">
+    <form class="query" action="/main" style="margin:auto;max-width:1500px">
         <input type="text" placeholder="Type your question here" name="search" required="">
         <button type="submit">Search<i class="fa fa-search"></i></button>
     </form>
+</div>
+<div class="qrepeat">
+    <p><strong>Question: Where can I get this?</strong></p>
+</div>
+<div class="answers">
+    <strong>Answer 1</strong><br>It is available at https//av-intelligence.com/
+</div>
+<div class="answers">
+    <strong>Answer 2</strong><br>Visit us at AV Intelligence at Millenia Walk, call us at (65) 6887 3789
+</div>
+<div class="thirdanswer">
+    <strong>Answer 3</strong><br>It is priced at $123.12.
+</div>
+<div class="more">
+    <a href="/moreanswers" style="color: #c6a85b;">Click here for More Answers...</a>
 </div>
 
 {% endblock %}

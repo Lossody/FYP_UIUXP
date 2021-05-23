@@ -60,7 +60,7 @@ form.query::after {
 }
 
 .qrepeat {
-    margin-left: 380px;
+    margin-left: 463px;
 }
 
 .answers {
@@ -68,7 +68,7 @@ form.query::after {
     padding: 10px;
     border: 5px solid gray;
     margin-top: 80px;
-    margin-left: 380px;
+    margin-left: 463px;
     text-align: center;
 }
 
@@ -77,7 +77,7 @@ form.query::after {
     padding: 10px;
     border: 5px solid gray;
     margin-top: 80px;
-    margin-left: 380px;
+    margin-left: 463px;
     text-align: center;
 }
 
@@ -85,7 +85,7 @@ form.query::after {
     margin-top: 60px;
     color: #c6a85b;
     margin-bottom: 200px;
-    margin-left: 930px;
+    margin-left: 1013px;
 }
 
 .nextans {
@@ -93,7 +93,7 @@ form.query::after {
     padding: 10px;
     border: 5px solid #c6a85b;
     margin-top: 80px;
-    margin-left: 380px;
+    margin-left: 463px;
     text-align: center;
 }
 
@@ -102,7 +102,7 @@ form.query::after {
     padding: 10px;
     border: 5px solid #c6a85b;
     margin-top: 80px;
-    margin-left: 380px;
+    margin-left: 463px;
     margin-bottom: 200px;
     text-align: center;
 }
