@@ -4,6 +4,7 @@ from flask import render_template , request , flash , redirect , url_for , sessi
 from application.form_login import LoginForm
 from application.form_register import RegisterForm
 from application.form_update import UpdateForm
+from application.form_feedback import FeedbackForm
 # This line import the login table
 from application.login_model import Login_Entry
 # This line import sqlite database
@@ -294,7 +295,8 @@ def signout():
 @app.route('/feedback')
 def feedbackPage():
     if "user" in session:
-        pass
+        form = FeedbackForm()
+        return render_template("feedback.html",form = form)
     # Damian, you can code here for your route
     else:
         flash("Please login first!","danger")
