@@ -14,26 +14,32 @@
                 <div class="col-md-5 border-right">
                     <form>
                         <p class="text-white">Rate your experience</p>
-                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                       <div class="rating"> 
+                        <form method="post">
+                            {{ form.hidden_tag() }}
+                            {{ form.example }}
+                            <input type="submit">
+                        </form>
+                            <!-- <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> -->
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-13 d-flex justify-content-center">
                             <div class="md-form form-group">
-                                <input type="text" id="name" name="name" class="form-control text-white" required="">
-                                <label for="name">Name</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="md-form form-group">
-                                <input type="email" id="email" name="email" class="form-control text-white" required="">
-                                <label for="email">E-mail</label>
+                                {{ form.category(class="form-select bg-dark text-white border-bottom border-right-0 border-top-0 border-left-0 justify-content-center"  aria-label="Category Select") }}
+                                <!-- <select class="form-select bg-dark text-white border-bottom border-right-0 border-top-0 border-left-0 justify-content-center" aria-label="Category Select">
+                                    <option selected>Category of doubt ?</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select> -->
                             </div>
                         </div>
 
                 </div>
                 <div class="col-md-7 mt-2">
                     <div class="md-form">
-                        <textarea type="text" id="feedback" name="feedback" rows="8" class="form-control md-textarea text-white" required=""></textarea>
+                        <textarea type="text" id="feedback" name="feedback" rows="8" class="form-control md-textarea text-white" maxlength = "300" onkeyup="count_up(this);" required=""></textarea>
                         <label for="message">Your Feedback (optional)</label>
+                        <span class="text-muted justify-content-right" id = "count">0</span>
                         <button type="submit" class="btn btn-primary btn-block">Send</button>
                     </div>
                 </div>
@@ -43,8 +49,9 @@
     </div>
 </div>
 
-
-
-
-
+<script>
+    function count_up(obj) {
+        document.getElementById('count').innerHTML = obj.value.length;
+    }
+</script>
 {% endblock %}
