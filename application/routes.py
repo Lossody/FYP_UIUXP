@@ -160,7 +160,7 @@ def addUser(login_entry):
         db.session.rollback()
         flash(error,"danger")
 
-
+#================================== Viewer Section ========================================
 # This section shows the employee table, only CEO and Secretary can see it
 @app.route('/viewer')
 def viewerPage():
@@ -183,7 +183,6 @@ def viewerPage():
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
-
 # This section removes the employee account, online CEO and secretary can use this function
 @app.route('/remove',methods=['GET','POST'])
 def remove():
@@ -225,6 +224,7 @@ def remove():
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
+#================================ Update Section ========================================
 @app.route('/updater',methods=['GET','POST'])
 def updatePage():
     if "user" in session:
@@ -282,12 +282,46 @@ def update():
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
-
+# =================================== Logout Section =================================
 # This line of code allow people to logout
 @app.route('/logout')
 def signout():
     session.pop("user",None)
     return redirect(url_for('loginPage'))
+
+# ================================== Feedback Section =================================
+# This line add a feedback section
+@app.route('/feedback')
+def feedbackPage():
+    if "user" in session:
+        pass
+    # Damian, you can code here for your route
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+@app.route('/feedback_complete',methods = ['GET','POST'])
+def feedbackPageComplete():
+    if "user" in session:
+        if request.method == 'POST':
+            pass
+        else:
+            return redirect(url_for("feedbackPage"))
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+
+
+
+
+
+
+
+
+
+
+
 #=================================================================================
 #==============================API for testing====================================
 #=================================================================================
