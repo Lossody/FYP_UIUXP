@@ -1,6 +1,6 @@
 {% extends "layout_feedback.html"%}
 {% block content %}
-<div class="container mt-5 pt-5">
+<div class="container mt-5 pt-5 pb-5">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-8 bg-dark px-5 rounded z-depth-5 mt-5">
             <div class="row">
@@ -12,15 +12,24 @@
             </div>
             <div class="row">
                 <div class="col-md-5 border-right">
-                    <form id="feedback_box">
+                    <form id="feedback_box" class = "col-12" action = "/feedback_complete" method = "post">
                         {{ form.hidden_tag() }}
                         <p class="text-white">Rate your experience</p>
-                        <div class="rating">
-                            <div class="rating-wrapper">
-                                {{ form.stars(class = "fa fa-star") }}
-                            </div>  
+                                
+                                {% for subfield in form.stars %}
+                                
+                                <label class = "custom-radio-btn">
+                                    <td>{{ subfield }}</td>
+                                    <span class = "checkmark"></span>
+                                </label>
+                                <span class = "custom-label">
+                                    {{ subfield.label }}
+                                </span>
+                                {% endfor %}
+                            
+                            
                             <!-- <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> -->
-                        </div>
+                        
                         <div class="col-md-13 d-flex justify-content-center">
                             <div class="md-form form-group">
                                 {{ form.category(class="form-select bg-dark text-white border-bottom border-right-0 border-top-0 border-left-0 justify-content-center") }}
