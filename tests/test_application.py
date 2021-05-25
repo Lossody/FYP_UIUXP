@@ -8,8 +8,6 @@ from flask import json
 
 @pytest.mark.parametrize('api_register',[
     ['User_1','123456','C'],
-    ['User_2','333333','S'],
-    ['User_3','654321','E']
 ])
 def test_api_register(client,api_register,capsys):
     with capsys.disabled():

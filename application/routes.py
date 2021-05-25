@@ -7,6 +7,7 @@ from application.form_update import UpdateForm
 from application.form_feedback import FeedbackForm
 # This line import the login table
 from application.login_model import Login_Entry
+from application.feedback_model import Feedback_Entry
 # This line import sqlite database
 from application import db
 from flask import jsonify
@@ -306,14 +307,36 @@ def feedbackPage():
 def feedbackPageComplete():
     if "user" in session:
         if request.method == 'POST':
-            pass
+            form = FeedbackForm()
+            if form.validate_on_submit() == True:
+                user_id = session['user']
+                rating = form.stars.data
+                category = form.category.data
+                feedback = form.feedback.data
+                name_check = Login_Entry.query.filter_by(id = user_id).first()
+                username = name_check.username
+                position = name_check.position
+                feedback_entry = Feedback_Entry(user_id = int(user_id),username = username,rating = rating,category = category,feedback = feedback, position = position)
+                add_feedback(feedback_entry)
+                flash("Comment added successfully")
+                return redirect(url_for("feedbackPage"))
+            else:
+                flash("Complete the form before submitting!")
+                return redirect(url_for("feedbackPage"))
         else:
             return redirect(url_for("feedbackPage"))
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
-
+def add_feedback(feedback_entry):
+    try:
+        db.session.add(feedback_entry)
+        db.session.commit()
+        return feedback_entry.user_id
+    except Exception as error:
+        db.session.rollback()
+        flash(error,"danger")
 
 
 
