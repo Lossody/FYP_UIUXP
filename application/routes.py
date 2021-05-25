@@ -11,6 +11,7 @@ from application.feedback_model import Feedback_Entry
 # This line import sqlite database
 from application import db
 from flask import jsonify
+from sqlalchemy import text
 
 # This line creates the database
 db.create_all()
@@ -87,6 +88,52 @@ def loginPageComplete():
         else:
             flash("Please login first!","danger")
             return redirect(url_for("loginPage"))
+
+
+# This section is for the statistics page, only CEO, Secretary and Employer.
+@app.route('/statistic')
+def statisticPage():
+    if "user" in session:
+        user = session['user']
+        # This section check if the user is a secretary or CEO
+        name_check = Login_Entry.query.filter_by(id = user).first()
+        role = name_check.position
+        print("Role:",role)
+        if role == "C" or role == "S" or role == "ER":
+            
+            # sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
+            # result = db.engine.execute(sql)
+            # test = [row for row in result]
+            # labels = [row[0] for row in result]
+            # values = [row[1] for row in result]
+            # print(test)
+            # print(labels)
+            # print(values)
+            
+            sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
+            result = db.engine.execute(sql)
+            labels = [row[0] for row in result]
+
+            sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
+            result = db.engine.execute(sql)
+            values = [row[1] for row in result]
+            
+            
+            return render_template('statistics.html', labels = labels, values=values, title = "Data Statistics")
+        else:
+            flash("Permission denied, seek higher up for assistance.")
+            return redirect(url_for("mainPage"))
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
+result = db.engine.execute(sql)
+labels = [row[0] for row in result]
+values = [row[1] for row in result]
+
+
+
 
 # This is the register section, only the CEO and Secretary and employer can access it
 @app.route('/register',methods = ['GET','POST'])

@@ -1,8 +1,6 @@
 {% extends "layout_statistics.html" %}
 {% block content %}
-<div class = "logo">
-    <img src="{{ url_for('static', filename='images/Logo.png') }}"width="25%" height="120">
-</div>
+
 
 <div class = "container mt-5">
     <div class = "row">
@@ -37,7 +35,30 @@
             <h5 class = "text-center">&#8226;T&C has relatively lower doubts among the employees as compared to other topics</h5>
         </div>
         <div class = "col-md-5">
-            <img src="{{ url_for('static', filename='images/Statistics_graph2.png') }}">
+            <canvas id="barGraph" width="500" height="400"></canvas>
+            <script>
+               var ctx = document.getElementById("barGraph").getContext("2d");
+               var barGraph = new Chart(ctx, {
+                   type: "bar",
+                   data: {
+                       labels: {{ labels | safe}},
+                       datasets: [
+                           {
+                               label: "Data points",
+                               data: {{ values | safe}},
+                               barThickness: 40,
+                               maxBarThickness: 80,
+                               minBarLength: 2,
+                               
+                           }
+                       ]
+                   },
+                   options : {
+                       responsive: false
+                   }
+               }) 
+            </script>
+            
         </div>
     </div>
 </div>
