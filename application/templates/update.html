@@ -1,7 +1,7 @@
 {% extends "layout_update.html" %}
 {% block content %}
 <div class = "update_box">
-    <img src="{{ url_for('static', filename='/images/Logo.png') }}"width="100%" height="120">
+    <img src="{{ url_for('static', filename='images/Logo.png') }}"width="100%" height="120">
     <form name = "form_update" action = "/update" method = "POST">
         {{ form.hidden_tag() }}
         {{ form.emp_id(id="emp_id",value = entry) }}

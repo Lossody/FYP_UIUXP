@@ -1,0 +1,23 @@
+{% extends "layout_main.html" %}
+{% block content %}
+<!-- Let this be the body of the webpage -->
+<div class="a">
+    <h3>Question & Answer</h3>
+    <br>
+    <p>Type your query into the search bar below.
+    <br>Once you click on the search button, a list of answers will appear.
+    <br>If you have not found a satisfactory answer, feel free to click on "More Options" to view more answers.
+    <br>Once you have finished, it would be great if you could fill in the optional feedback form!
+    </p>
+</div>
+<br>
+<div>
+    <h4 class="b">Query:</h4>
+    <br>
+    <form class="query" action="/answers" style="margin:auto;max-width:1500px">
+        <input type="text" placeholder="Type your question here" name="search" required="">
+        <button type="submit">Search<i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+{% endblock %}

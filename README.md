@@ -1,5 +1,6 @@
 # FYP_UIUXP
 Eric 
-Asher lol
+Asher
 Russell 
-Damian u suck
+Damian
+Choon Qi

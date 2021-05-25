@@ -4,8 +4,10 @@ from flask import render_template , request , flash , redirect , url_for , sessi
 from application.form_login import LoginForm
 from application.form_register import RegisterForm
 from application.form_update import UpdateForm
+from application.form_feedback import FeedbackForm
 # This line import the login table
 from application.login_model import Login_Entry
+from application.feedback_model import Feedback_Entry
 # This line import sqlite database
 from application import db
 from flask import jsonify
@@ -19,22 +21,44 @@ db.create_all()
 def loginPage():
     if "user" not in session:
         form = LoginForm()
-        return render_template('login.html', title = "Login" , form = form)
+        return render_template('login.html', title="Login" , form=form)
     else:
         return redirect(url_for("mainPage"))
 
-# This section is for the main page, any people can access it.
+# This section is for the Main page, any people can access it.
 @app.route('/main')
 def mainPage():
     if "user" in session:
         user = session["user"]
         print(user)
-        return render_template('statistics.html',title ="Main")
+        return render_template('feedback.html', title="Main")
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
-@app.route('/login_complete',methods = ['GET','POST'])
+# This section is for the Answers page, any people can access it.
+@app.route('/answers')
+def answersPage():
+    if "user" in session:
+        user = session["user"]
+        print(user)
+        return render_template('answers.html', title="Answers")
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+# This section is for the More Answers page, any people can access it.
+@app.route('/moreanswers')
+def moreanswersPage():
+    if "user" in session:
+        user = session["user"]
+        print(user)
+        return render_template('moreanswers.html', title="More Answers")
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+@app.route('/login_complete', methods = ['GET','POST'])
 def loginPageComplete():
     if "user" in session:
         return redirect(url_for("mainPage"))
@@ -99,12 +123,12 @@ def registerPageComplete():
                 position = form.position.data
                 new_user = Login_Entry( username = username, password = password , position = position)
                 add_login_entry(new_user)
-                flash("Account Register Succesfully!","success")
-                return render_template('register.html',form = form ,title="Registeration")
+                flash("Account Register Successfully!","success")
+                return render_template('register.html',form = form ,title="Registration")
             else:
                 
                 flash("Account Already Registered!","danger")
-                return render_template('register.html',form = form ,title="Registeration")
+                return render_template('register.html',form = form ,title="Registration")
         else:
             username = form.name.data
             password = form.password.data
@@ -116,7 +140,7 @@ def registerPageComplete():
 
 
 
-# This function goes together with the registeration page
+# This function goes together with the registration page
 # It checks if the user is the CEO or Secretary
 def getRole(ids):
     try:
@@ -138,15 +162,20 @@ def addUser(login_entry):
         db.session.rollback()
         flash(error,"danger")
 
-
+#================================== Viewer Section ========================================
 # This section shows the employee table, only CEO and Secretary can see it
 @app.route('/viewer')
 def viewerPage():
     if "user" in session:
         user = session['user']
         # This section check if the user is a secretary or CEO
-        name_check = Login_Entry.query.filter_by(id = user).first()
-        role = name_check.position
+        try:
+            name_check = Login_Entry.query.filter_by(id = user).first()
+            role = name_check.position
+        except:
+            session.pop('user',None)
+            flash("Your account cannot be found!")
+            return redirect(url_for("loginPage"))
         print("Role:",role)
         if role == "C" or role == "S":
             return render_template('viewer.html',entries = get_entries())
@@ -156,7 +185,6 @@ def viewerPage():
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
-
 # This section removes the employee account, online CEO and secretary can use this function
 @app.route('/remove',methods=['GET','POST'])
 def remove():
@@ -169,12 +197,20 @@ def remove():
             if request.method == "POST":
                 req = request.form
                 id = req['id']
+                print("User ID = ",user)
+                print("Remove ID = ",id)
+                print(user is id)
+                print(type(user), type(id))
                 # Check if the entry is empty
                 if Login_Entry.query.get(id) != None:
                     # If the entry is not empty, check if it is the CEO
                     remove_role = Login_Entry.query.get(id)
+                    # Check if the person removing it is themself
                     if remove_role.position == "C":
                         flash("You cannot remove the CEO!")
+                        return render_template("viewer.html",entries = get_entries(),index = True)
+                    elif user == int(id):
+                        flash("You cannot remove yourself!")
                         return render_template("viewer.html",entries = get_entries(),index = True)
                     else:
                         remove_entry(id)
@@ -190,6 +226,7 @@ def remove():
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
+#================================ Update Section ========================================
 @app.route('/updater',methods=['GET','POST'])
 def updatePage():
     if "user" in session:
@@ -247,6 +284,50 @@ def update():
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
+# =================================== Logout Section =================================
+# This line of code allow people to logout
+@app.route('/logout')
+def signout():
+    session.pop("user",None)
+    return redirect(url_for('loginPage'))
+
+# ================================== Feedback Section =================================
+# This line add a feedback section
+@app.route('/feedback')
+def feedbackPage():
+    if "user" in session:
+        form = FeedbackForm()
+        return render_template("feedback.html",form = form)
+    # Damian, you can code here for your route
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
+
+@app.route('/feedback_complete',methods = ['GET','POST'])
+def feedbackPageComplete():
+    if "user" in session:
+        if request.method == 'POST':
+            form = FeedbackForm()
+            if form.validate_on_submit() == True:
+                user_id = session['user']
+                rating = form.stars.data
+                category = form.category.data
+                feedback = form.feedback.data
+                name_check = Login_Entry.query.filter_by(id = user_id).first()
+                username = name_check.username
+                position = name_check.position
+                feedback_entry = Feedback_Entry(user_id = int(user_id),username = username,rating = rating,category = category,feedback = feedback, position = position)
+                add_feedback(feedback_entry)
+                flash("Comment added successfully")
+                return redirect(url_for("feedbackPage"))
+            else:
+                flash("Complete the form before submitting!")
+                return redirect(url_for("feedbackPage"))
+        else:
+            return redirect(url_for("feedbackPage"))
+    else:
+        flash("Please login first!","danger")
+        return redirect(url_for("loginPage"))
 
 #=================================================================================
 #==============================API for testing====================================
