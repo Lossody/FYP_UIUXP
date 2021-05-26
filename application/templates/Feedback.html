@@ -6,33 +6,42 @@
             <div class="row">
                 <div class="card-header bg-dark mt-4">
                     <h1 class="text-white">Feedback</h1>
-                    <div class="col-sm-12 border border-bottom border-primary"></div>
+                    <div class="col-sm-12 border border-bottom border-warning"></div>
                     <br>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 border-right">
-                    <form id="feedback_box" class = "col-12" action = "/feedback_complete" method = "post">
+                <div class="col-md-5 border-right border-right border-warning">
+                    <form id="feedback_box" class="col-12" action="/feedback_complete" method="post">
                         {{ form.hidden_tag() }}
                         <p class="text-white">Rate your experience</p>
-                                
-                                {% for subfield in form.stars %}
-                                
-                                <label class = "custom-radio-btn">
-                                    <td>{{ subfield }}</td>
-                                    <span class = "checkmark"></span>
-                                </label>
-                                <span class = "custom-label">
-                                    {{ subfield.label }}
-                                </span>
-                                {% endfor %}
-                            
-                            
-                            <!-- <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> -->
-                        
-                        <div class="col-md-13 d-flex justify-content-center">
+
+                        <div class="row d-flex justify-content-center">
+                            {% for subfield in form.stars %}
+
+                            <label class="custom-radio-btn">
+                                <td>{{ subfield }}</td>
+                                <span class="checkmark"></span>
+                            </label>
+                            <!-- <span class="custom-label">
+                                {{ subfield.label }}
+                            </span> -->
+                            {% endfor %}
+
+                        </div>
+                        <!-- <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> -->
+
+                        <div class="row">
+                            <small id="Unsatisfied" class="text-muted col">Not Satisfied</small>
+                            <small id="Satisfied" class="text-muted col text-right"> Very Satisfied</small>
+                        </div>
+
+
+
+                        <div class="col-md-11 d-flex justify-content-center">
                             <div class="md-form form-group">
-                                {{ form.category(class="form-select bg-dark text-white border-bottom border-right-0 border-top-0 border-left-0 justify-content-center") }}
+                                {{ form.category(class="form-select bg-dark text-white border-bottom border-right-0
+                                border-top-0 border-left-0 justify-content-center") }}
                                 <!-- <select class="form-select bg-dark text-white border-bottom border-right-0 border-top-0 border-left-0 justify-content-center" aria-label="Category Select">
                                     <option selected>Category of doubt ?</option>
                                     <option value="1">One</option>
@@ -52,7 +61,8 @@
                             required=""></textarea> -->
                         <label for="message">Your Feedback (optional)</label>
                         <span class="text-muted justify-content-right" id="count">0</span>
-                        <button type="submit" class="btn btn-primary btn-block">Send</button>
+
+                        <button type="submit" class="btn btn-warning btn-block">Send</button>
                     </div>
                 </div>
                 </form>
