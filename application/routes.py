@@ -101,15 +101,7 @@ def statisticPage():
         print("Role:",role)
         if role == "C" or role == "S" or role == "ER":
             
-            # sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
-            # result = db.engine.execute(sql)
-            # test = [row for row in result]
-            # labels = [row[0] for row in result]
-            # values = [row[1] for row in result]
-            # print(test)
-            # print(labels)
-            # print(values)
-            
+        
             sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
             result = db.engine.execute(sql)
             labels = [row[0] for row in result]
@@ -117,9 +109,31 @@ def statisticPage():
             sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
             result = db.engine.execute(sql)
             values = [row[1] for row in result]
-            
 
-            return render_template('statistics.html', labels = labels, values=values, title = "Data Statistics")
+            count = 0
+            biggestNum = 0
+            biggestNumCount = 0
+            lowestNum = 1000000
+            lowestNumCount = 0
+
+            for num in values:
+                if biggestNum < num:
+                    biggestNum = num
+                if lowestNum > num:
+                    lowestNum = num
+                
+            for x in values:
+                if x == biggestNum:
+                    biggestNumCount = count
+                if x == lowestNum:
+                    lowestNumCount = count
+
+                count += 1
+                    
+            
+            
+            return render_template('statistics.html', labels = labels, values=values,
+             biggestNumCount = biggestNumCount, biggestNum = biggestNum, lowestNumCount = lowestNumCount, title = "Data Statistics")
         else:
             flash("Permission denied, seek higher up for assistance.")
             return redirect(url_for("mainPage"))
