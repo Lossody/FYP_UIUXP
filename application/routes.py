@@ -118,7 +118,7 @@ def statisticPage():
             result = db.engine.execute(sql)
             values = [row[1] for row in result]
             
-            
+
             return render_template('statistics.html', labels = labels, values=values, title = "Data Statistics")
         else:
             flash("Permission denied, seek higher up for assistance.")
@@ -126,12 +126,6 @@ def statisticPage():
     else:
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
-
-sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
-result = db.engine.execute(sql)
-labels = [row[0] for row in result]
-values = [row[1] for row in result]
-
 
 
 
