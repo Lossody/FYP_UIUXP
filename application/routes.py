@@ -89,6 +89,7 @@ def loginPageComplete():
             flash("Please login first!","danger")
             return redirect(url_for("loginPage"))
 
+## To be used for the User UX Graph in statistics page
 def emptyFiller(labels,values):
     ratingLabels = [1,2,3,4,5]
     for rating in ratingLabels:
