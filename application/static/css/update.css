@@ -85,3 +85,7 @@ h1{
     background-color: #ffd479;
     top: -10px;
 }
+
+#hider{
+    display:none;
+}
