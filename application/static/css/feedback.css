@@ -118,4 +118,9 @@ p {
   margin-left: 100px
 }
 
-
+body {
+  background-image: url("../images/bgimg.PNG");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}

@@ -89,3 +89,10 @@ h1{
 #hider{
     display:none;
 }
+
+body {
+    background-image: url("../images/bgimg.PNG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}

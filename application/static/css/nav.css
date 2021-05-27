@@ -12,12 +12,12 @@ li a {
     text-align: center;
     padding: 35px 37px;
     height: 100px;
-    text-decoration: none;
 }
 
 li a:hover {
     background-color: #c6a85b49;
     transition: 0.5s;
+    text-decoration: none;
 }
 
 ul {

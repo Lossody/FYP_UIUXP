@@ -14,6 +14,11 @@
     text-align: center;
     font-family: Rajdhani;
     font-size: 70px;
+    font-weight: 900;
+}
+
+h3 {
+    font-weight: 900;
 }
 
 * {
@@ -60,7 +65,8 @@ form.query::after {
 }
 
 .qrepeat {
-    margin-left: 463px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .answers {
@@ -71,6 +77,9 @@ form.query::after {
     text-align: center;
     background-color: #c6a85b;
     color: white;
+}
+.answers:hover {
+    background-color: #9b7f3a;
 }
 
 .thirdanswer {
@@ -83,11 +92,15 @@ form.query::after {
     color: white;
 }
 
+.thirdanswer:hover {
+    background-color: #9b7f3a;
+}
+
 .more {
     margin-top: 60px;
-    color: #c6a85b;
     margin-bottom: 200px;
-    margin-left: 1013px;
+    text-align: center;
+    font-size: 25px;
 }
 
 .nextans {
@@ -98,6 +111,10 @@ form.query::after {
     text-align: center;
     background-color: gray;
     color: white;
+}
+
+.nextans:hover {
+    background-color: rgb(92, 92, 92);
 }
 
 .lastans {
@@ -111,9 +128,30 @@ form.query::after {
     color: white;
 }
 
+.lastans:hover {
+    background-color: rgb(92, 92, 92);
+}
+
 body {
     background-image: url("../images/bgimg.PNG");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
+}
+
+.feedback {
+    width: 300px;
+    padding: 10px;
+    margin-top: 80px;
+    margin-left: 700px;
+    margin-bottom: 200px;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+}
+
+.feedback:hover {
+    background-color: rgb(92, 92, 92);
+    text-decoration: none;
 }
