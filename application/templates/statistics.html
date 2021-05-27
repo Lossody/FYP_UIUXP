@@ -30,7 +30,7 @@
             <h5 class = "text-center">&#8226;{{labels[lowestNumCount]}} has relatively lower doubts among the employees as compared to other topics</h5>
         </div>
         <div class = "col-md-5">
-            <canvas id="barGraph" width="500" height="400"></canvas>
+            <canvas id="barGraph" width="440" height="400"></canvas>
             <script>
                var ctx = document.getElementById("barGraph").getContext("2d");
                var barGraph = new Chart(ctx, {
@@ -64,9 +64,9 @@
 <div class = "container">
     <div class = "row mt-5">
         <div class = "col-md-6">
-           <h3>Website User Experience</h3><br>
+           <h3 margin-left="30">Website User Experience</h3><br>
 
-           <canvas id="barGraphUX" width="450" height="350"></canvas>
+           <canvas id="barGraphUX" width="470" height="380"></canvas>
            <script>
             var ctx = document.getElementById("barGraphUX").getContext("2d");
             var barGraph = new Chart(ctx, {
@@ -96,10 +96,16 @@
                 }
             }) 
          </script>
-        <br>
-        <h5 class = "text-left"> Poor</h5>
-        <h5 class = "text-right"> Excellent</h5>
-
+            <br>
+            <div class = "row">
+                <div class = "col-md-6">
+                    <h5 class = "text-left"> Poor</h5>
+                </div>
+            
+                <div class = "col-md-6 pr-4">
+                    <h5 class = "text-right"> Excellent</h5>
+                </div>
+            </div>
         </div>
         <div class = "col-md-6">
             <div class = "spacer">
