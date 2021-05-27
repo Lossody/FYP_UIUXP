@@ -384,6 +384,15 @@ def feedbackPageComplete():
         flash("Please login first!","danger")
         return redirect(url_for("loginPage"))
 
+def add_feedback(feedback_entry):
+    try:
+        db.session.add(feedback_entry)
+        db.session.commit()
+        return "Success"
+    except Exception as error:
+        db.session.rollback()
+        flash(error,"danger")
+
 #=================================================================================
 #==============================API for testing====================================
 #=================================================================================
