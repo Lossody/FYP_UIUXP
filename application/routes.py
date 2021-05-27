@@ -89,6 +89,29 @@ def loginPageComplete():
             flash("Please login first!","danger")
             return redirect(url_for("loginPage"))
 
+def emptyFiller(labels,values):
+    ratingLabels = [1,2,3,4,5]
+    for rating in ratingLabels:
+        if '1' not in labels:
+            labels.insert(0,"1")
+            values.insert(0,0)
+            
+        elif '2' not in labels:
+            labels.insert(1,"2")
+            values.insert(1,0)
+            
+        elif '3' not in labels:
+            labels.insert(2,"3")
+            values.insert(2,0)
+            
+        elif '4' not in labels:
+            labels.insert(3,"4")
+            values.insert(3,0)
+            
+        elif '5' not in labels:
+            labels.insert(4,"5")
+            values.insert(4,0)
+
 
 # This section is for the statistics page, only CEO, Secretary and Employer.
 @app.route('/statistic')
@@ -101,7 +124,8 @@ def statisticPage():
         print("Role:",role)
         if role == "C" or role == "S" or role == "ER":
             
-        
+            ## -------------------------- GRAPH FOR TOPICS CLARIFICATION ---------------------------------
+            ## Query to database to get each category and the total count of each
             sql = text('SELECT category, COUNT(*) AS `count` FROM Feedback_Table GROUP BY category')
             result = db.engine.execute(sql)
             labels = [row[0] for row in result]
@@ -116,6 +140,7 @@ def statisticPage():
             lowestNum = 1000000
             lowestNumCount = 0
 
+            ## For loop to display highest and lowest feedback count for topics clarification
             for num in values:
                 if biggestNum < num:
                     biggestNum = num
@@ -125,15 +150,58 @@ def statisticPage():
             for x in values:
                 if x == biggestNum:
                     biggestNumCount = count
+                   
                 if x == lowestNum:
                     lowestNumCount = count
-
-                count += 1
                     
+                count += 1
+
             
+
+            ## ---------------------------- GRAPH FOR WEBSITE UX ---------------------------------------
+            ## Query to database to find rating grouping by positions
+            ## Grouping by employee
+            sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "E" GROUP BY rating,position')
+            result = db.engine.execute(sql)
+            values1 = [row[1] for row in result]
+
+            sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "E" GROUP BY rating,position')
+            result = db.engine.execute(sql)
+            labels1 = [row[0] for row in result]
+
+            ## Execute empty filler func
+            emptyFiller(labels1,values1)
+            print(values1)
+     
+            ## Grouping by employer
+            sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "ER" GROUP BY rating,position')
+            result = db.engine.execute(sql)
+            values2 = [row[1] for row in result]
+
+            sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "ER" GROUP BY rating,position')
+            result = db.engine.execute(sql)
+            labels2 = [row[0] for row in result]
             
-            return render_template('statistics.html', labels = labels, values=values,
-             biggestNumCount = biggestNumCount, biggestNum = biggestNum, lowestNumCount = lowestNumCount, title = "Data Statistics")
+           ## Execute empty filler func
+            emptyFiller(labels2,values2)
+            print(values2)
+            
+            ## Grouping by secretary
+            sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "S" GROUP BY rating,position')
+            result = db.engine.execute(sql)
+            values3 = [row[1] for row in result]
+
+            sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "S" GROUP BY rating,position')
+            result = db.engine.execute(sql)
+            labels3 = [row[0] for row in result]
+
+            emptyFiller(labels3,values3)
+            print(values3)
+                 
+            return render_template('statistics.html', labels = labels, values=values, 
+             values1=values1, values2=values2, values3=values3,
+             biggestNumCount = biggestNumCount, biggestNum = biggestNum, 
+             lowestNumCount = lowestNumCount, title = "Data Statistics")
         else:
             flash("Permission denied, seek higher up for assistance.")
             return redirect(url_for("mainPage"))
