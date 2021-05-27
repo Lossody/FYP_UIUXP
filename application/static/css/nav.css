@@ -2,4 +2,27 @@
     width: 100%;
     white-space: nowrap;
 }
-a{text-decoration: none}
+
+.navbar-header {
+    text-decoration: none;
+}
+
+li a {
+    display: block;
+    text-align: center;
+    padding: 35px 37px;
+    height: 100px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #c6a85b49;
+    transition: 0.5s;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
