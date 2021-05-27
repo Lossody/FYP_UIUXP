@@ -13,7 +13,7 @@
 .b {
     text-align: center;
     font-family: Rajdhani;
-    font-size: 40px;
+    font-size: 70px;
 }
 
 * {
@@ -35,18 +35,18 @@ form.query button {
     float: left;
     width: 5%;
     padding: 10px;
-    background: #c6a85b;
+    background: #2196F3;
     color: white;
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
-    margin-bottom: 200px;
+    margin-bottom: 250px;
 }
   
 form.query button:hover {
-    background: gold;
-  }
+    background: #0b7dda;
+}
   
 form.query::after {
     content: "";
@@ -66,19 +66,21 @@ form.query::after {
 .answers {
     width: 775px;
     padding: 10px;
-    border: 5px solid gray;
     margin-top: 80px;
     margin-left: 463px;
     text-align: center;
+    background-color: #c6a85b;
+    color: white;
 }
 
 .thirdanswer {
     width: 775px;
     padding: 10px;
-    border: 5px solid gray;
     margin-top: 80px;
     margin-left: 463px;
     text-align: center;
+    background-color: #c6a85b;
+    color: white;
 }
 
 .more {
@@ -91,18 +93,27 @@ form.query::after {
 .nextans {
     width: 775px;
     padding: 10px;
-    border: 5px solid #c6a85b;
     margin-top: 80px;
     margin-left: 463px;
     text-align: center;
+    background-color: gray;
+    color: white;
 }
 
 .lastans {
     width: 775px;
     padding: 10px;
-    border: 5px solid #c6a85b;
     margin-top: 80px;
     margin-left: 463px;
     margin-bottom: 200px;
     text-align: center;
+    background-color: gray;
+    color: white;
+}
+
+body {
+    background-image: url("../images/bgimg.PNG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
