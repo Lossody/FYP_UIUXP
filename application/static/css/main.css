@@ -74,8 +74,11 @@ form.query::after {
     width: 775px;
     padding: 10px;
     margin-top: 80px;
-    margin-left: 463px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+    /* display: flex;
+    justify-content: center; */
     background-color: #c6a85b;
     color: white;
 }
@@ -89,7 +92,8 @@ form.query::after {
     width: 775px;
     padding: 10px;
     margin-top: 80px;
-    margin-left: 463px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     background-color: #c6a85b;
     color: white;
@@ -112,7 +116,8 @@ form.query::after {
     width: 775px;
     padding: 10px;
     margin-top: 80px;
-    margin-left: 463px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     background-color: gray;
     color: white;
@@ -128,7 +133,8 @@ form.query::after {
     width: 775px;
     padding: 10px;
     margin-top: 80px;
-    margin-left: 463px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 200px;
     text-align: center;
     background-color: gray;
