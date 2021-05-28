@@ -32,7 +32,7 @@ form.query input[type=text] {
     border: 1px solid grey;
     float: left;
     width: 47%;
-    margin-left: 364px;
+    margin-left: 370px;
     background: #f1f1f1;
     text-align: center;
 }
@@ -160,15 +160,7 @@ body {
     width: 300px;
     padding: 10px;
     margin-top: 80px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    margin-left: auto;
-=======
     margin-left:auto;
->>>>>>> f656bb8ffdfc5d7cfcc6ab4901062ecf72e599a7
-=======
-    margin-left:auto;
->>>>>>> f656bb8ffdfc5d7cfcc6ab4901062ecf72e599a7
     margin-right:auto;
     margin-bottom: 200px;
     text-align: center;
