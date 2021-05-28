@@ -58,8 +58,9 @@ h5 {
 }
 
 body {
-    background-image: url("../images/bgimg.PNG");
+    background-image: url("../images/bgimg_4.PNG");
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    margin-bottom: 200px;
 }
