@@ -8,14 +8,13 @@
 }
 
 li a {
-    display: block;
     text-align: center;
     padding: 30px 18px;
     height: 100px;
 }
 
 li a:hover {
-    background-color: #c6a85b49;
+    /* background-color: #c6a85b49; */
     transition: 0.5s;
     text-decoration: none;
 }
@@ -27,3 +26,11 @@ ul {
     overflow: hidden;
 }
 
+h6:hover {
+    color: #c6a85b!important;
+    transition: 0.5s;
+}
+
+::-webkit-scrollbar {
+    display:none;
+}

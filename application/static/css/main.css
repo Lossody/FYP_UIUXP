@@ -81,6 +81,8 @@ form.query::after {
 }
 .answers:hover {
     background-color: #9b7f3a;
+    transition: 0.5s;
+    text-decoration: none;
 }
 
 .thirdanswer {
@@ -95,6 +97,8 @@ form.query::after {
 
 .thirdanswer:hover {
     background-color: #9b7f3a;
+    transition: 0.5s;
+    text-decoration: none;
 }
 
 .more {
@@ -116,6 +120,8 @@ form.query::after {
 
 .nextans:hover {
     background-color: rgb(92, 92, 92);
+    transition: 0.5s;
+    text-decoration: none;
 }
 
 .lastans {
@@ -131,6 +137,8 @@ form.query::after {
 
 .lastans:hover {
     background-color: rgb(92, 92, 92);
+    transition: 0.5s;
+    text-decoration: none;
 }
 
 body {
@@ -157,4 +165,9 @@ body {
 .feedback:hover {
     background-color: rgb(92, 92, 92);
     text-decoration: none;
+    transition: 0.5s;
+}
+
+::-webkit-scrollbar {
+    display:none;
 }
