@@ -402,10 +402,10 @@ def update():
                 flash("Update Successful!",'success')
                 return redirect(url_for("viewerPage"))
             else:
+                flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
                 return redirect(url_for("viewerPage"))
 
         else:
-            flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
             return redirect(url_for("viewerPage"))
     else:
         flash("Please login first!","danger")
