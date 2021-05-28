@@ -14,6 +14,8 @@
         <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/nav.css')}}">
         <!-- Using chart.js to plot graphs -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Error CSS -->
+        <link rel="stylesheet" href = "{{ url_for('static',filename = 'css/error.css')}}"/>
     </head>
     <body>
         {% include "includes/nav.html" %}
@@ -21,14 +23,16 @@
         {% block content %}
         {% endblock %}
         <!-- This line generate the error -->
-        {% with messages = get_flashed_messages(with_categories=true)%}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                        <div class = "text-center text-danger">
-                            {{ message }}
-                        </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+        <div class = "text-center">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                            <div class = "{{ category }} pt-3 pb-3 mb-5" id="error_message">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+            </div>
     </body>
 </html>

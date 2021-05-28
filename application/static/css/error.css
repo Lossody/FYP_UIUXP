@@ -1,0 +1,14 @@
+#error_message{
+    border:solid hsl(41, 100%, 74%);
+    background-color:#faefd9;
+    width:400px;
+    margin-left:37%;
+}
+
+.error{
+    color:red;
+}
+
+.success{
+    color:green;
+}

@@ -34,7 +34,7 @@ def mainPage():
         print(user)
         return render_template('main.html', title="Main")
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 # This section is for the Answers page, any people can access it.
@@ -45,7 +45,7 @@ def answersPage():
         print(user)
         return render_template('answers.html', title="Answers")
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 # This section is for the More Answers page, any people can access it.
@@ -56,7 +56,7 @@ def moreanswersPage():
         print(user)
         return render_template('moreanswers.html', title="More Answers")
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 @app.route('/login_complete', methods = ['GET','POST'])
@@ -72,17 +72,13 @@ def loginPageComplete():
                 name_check = Login_Entry.query.filter_by(username = name).first()
                 # Checks if the user exists
                 if name_check is None:
-                    print("User does not exist")
-                    flash("User does not exist!","danger")
                     return render_template("Login.html",form = form)
                 # If the user does not exist
                 else:
-                    print("Correct Password: ",name_check.password)
-                    print("User Password: ",password)
                     name_password = name_check.password
                     #If the user exists, check if the password is correct
                     if name_password != password:
-                        flash("Wrong Password!","danger")
+                        flash("Wrong Password!","error")
                         return render_template("Login.html",form = form)
                     # If the login is successful, include the user id in the parameter
                     else:
@@ -90,10 +86,10 @@ def loginPageComplete():
                         session['user'] = user_id
                         return redirect(url_for('mainPage'))
             else:
-                flash("Invalid Password/Name Length!")
+                flash("Invalid Password/Name Length!",'error')
                 return redirect(url_for("loginPage"))
         else:
-            flash("Please login first!","danger")
+            flash("Please login first!","error")
             return redirect(url_for("loginPage"))
 
 ## To be used for the User UX Graph in statistics page
@@ -211,10 +207,10 @@ def statisticPage():
              biggestNumCount = biggestNumCount, biggestNum = biggestNum, 
              lowestNumCount = lowestNumCount, title = "Data Statistics")
         else:
-            flash("Permission denied, seek higher up for assistance.")
+            flash("Permission denied, seek higher up for assistance.",'error')
             return redirect(url_for("mainPage"))
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 
@@ -227,15 +223,14 @@ def registerPage():
         # This section check if the user is a secretary or CEO
         name_check = Login_Entry.query.filter_by(id = user).first()
         role = name_check.position
-        print("Role:",role)
         if role == "C" or role == "S" or role == "ER":
             form = RegisterForm()
             return render_template('register.html',form = form, title = "Registration")
         else:
-            flash("Permission denied, seek higher up for assistance.")
+            flash("Permission denied, seek higher up for assistance.",'error')
             return redirect(url_for("mainPage"))
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 @app.route('/register_complete',methods = ['GET','POST'])
@@ -258,13 +253,13 @@ def registerPageComplete():
                 return render_template('register.html',form = form ,title="Registration")
             else:
                 
-                flash("Account Already Registered!","danger")
+                flash("Account Already Registered!","error")
                 return render_template('register.html',form = form ,title="Registration")
         else:
             username = form.name.data
             password = form.password.data
             print(username,password)
-            flash("Error creating an Account.","danger")
+            flash("Error creating an Account.","error")
             return render_template('register.html',form = form)
     else:
         return redirect(url_for("mainPage"))
@@ -280,7 +275,7 @@ def getRole(ids):
         return entries
     except Exception as error:
         db.session.rollback()
-        flash(error,"danger") 
+        flash(error,"error") 
         return 0
 
 # Adds new user in the user table
@@ -291,7 +286,7 @@ def addUser(login_entry):
         return login_entry.id
     except Exception as error:
         db.session.rollback()
-        flash(error,"danger")
+        flash(error,"error")
 
 #================================== Viewer Section ========================================
 # This section shows the employee table, only CEO and Secretary can see it
@@ -305,16 +300,16 @@ def viewerPage():
             role = name_check.position
         except:
             session.pop('user',None)
-            flash("Your account cannot be found!")
+            flash("Your account cannot be found!",'error')
             return redirect(url_for("loginPage"))
         print("Role:",role)
         if role == "C" or role == "S":
             return render_template('viewer.html',entries = get_entries())
         else:
-            flash("Permission denied, seek higher up for assistance.")
+            flash("Permission denied, seek higher up for assistance.",'error')
             return redirect(url_for("mainPage")) 
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 # This section removes the employee account, online CEO and secretary can use this function
 @app.route('/remove',methods=['GET','POST'])
@@ -338,10 +333,10 @@ def remove():
                     remove_role = Login_Entry.query.get(id)
                     # Check if the person removing it is themself
                     if remove_role.position == "C":
-                        flash("You cannot remove the CEO!")
+                        flash("You cannot remove the CEO!",'error')
                         return render_template("viewer.html",entries = get_entries(),index = True)
                     elif user == int(id):
-                        flash("You cannot remove yourself!")
+                        flash("You cannot remove yourself!",'error')
                         return render_template("viewer.html",entries = get_entries(),index = True)
                     else:
                         remove_entry(id)
@@ -351,10 +346,10 @@ def remove():
             else:
                 return redirect(url_for('historyPage'))
         else:
-            flash("Permission denied, seek higher up for assistance.")
+            flash("Permission denied, seek higher up for assistance.",'error')
             return redirect(url_for("mainPage"))
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 #================================ Update Section ========================================
@@ -379,16 +374,16 @@ def updatePage():
         # If the person is a secretary
         elif role == "S":
             if role_change == "C":
-                flash("Permission denied, seek higher up for assistance.")
+                flash("Permission denied, seek higher up for assistance.",'error')
                 return redirect(url_for("viewerPage"))
             else:
                 return render_template('update.html',entry = role_id,form = form)
         else:
-            flash("Permission denied, seek higher up for assistance.")
+            flash("Permission denied, seek higher up for assistance.",'error')
             return redirect(url_for("mainPage"))
         
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 @app.route('/update',methods=['GET','POST'])
@@ -404,12 +399,13 @@ def update():
                 print("Error check: ",emp_id)
                 print(emp_id , username , password , position)
                 update_entry(emp_id,username,password,position)
-                flash("Update Successful!")
+                flash("Update Successful!",'success')
                 return redirect(url_for("viewerPage"))
             else:
                 return redirect(url_for("viewerPage"))
 
         else:
+            flash("Action unsuccessful!",'error')
             return redirect(url_for("viewerPage"))
     else:
         flash("Please login first!","danger")
@@ -431,7 +427,7 @@ def feedbackPage():
         return render_template("feedback.html",form = form)
     # Damian, you can code here for your route
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 @app.route('/feedback_complete',methods = ['GET','POST'])
@@ -449,15 +445,15 @@ def feedbackPageComplete():
                 position = name_check.position
                 feedback_entry = Feedback_Entry(user_id = int(user_id),username = username,rating = rating,category = category,feedback = feedback, position = position)
                 add_feedback(feedback_entry)
-                flash("Comment added successfully")
+                flash("Comment added successfully",'success')
                 return redirect(url_for("mainPage"))
             else:
-                flash("Complete the form before submitting!")
+                flash("Complete the form before submitting!",'error')
                 return redirect(url_for("mainPage"))
         else:
             return redirect(url_for("feedbackPage"))
     else:
-        flash("Please login first!","danger")
+        flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 def add_feedback(feedback_entry):
