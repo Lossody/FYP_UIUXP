@@ -13,9 +13,12 @@
     <div>
         <h4 class="b">Query:</h4>
         <br>
-        <form id="queryid" class="query" action="/answers" style="margin:auto;max-width:1500px">
-            <input type="text" placeholder="Type your question here" name="search" required="">
-            <button type="submit">Search<i class="fa fa-search"></i></button>
+        <form id="queryid" class="query" action="/answers" style="margin:auto;max-width:1500px"method = "POST">
+            {{ form.hidden_tag() }}
+            {{ form.query(type="text",placeholder="Type your question here") }}
+            <!-- <input type="text" placeholder="Type your question here" name="search" required=""> -->
+            {{ form.search(type="submit",class="searcher")}}
+            <!-- <button type="submit">Search<i class="fa fa-search"></i></button> -->
         </form>
     </div>
 </div>

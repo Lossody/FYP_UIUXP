@@ -37,7 +37,7 @@ form.query input[type=text] {
     text-align: center;
 }
   
-form.query button {
+.searcher {
     float: left;
     width: 5%;
     padding: 10px;
@@ -160,7 +160,12 @@ body {
     width: 300px;
     padding: 10px;
     margin-top: 80px;
-    margin-left: 700px;
+<<<<<<< HEAD
+    margin-left: auto;
+=======
+    margin-left:auto;
+>>>>>>> f656bb8ffdfc5d7cfcc6ab4901062ecf72e599a7
+    margin-right:auto;
     margin-bottom: 200px;
     text-align: center;
     background-color: gray;
