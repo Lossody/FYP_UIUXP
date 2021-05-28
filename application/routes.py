@@ -86,7 +86,7 @@ def loginPageComplete():
                         session['user'] = user_id
                         return redirect(url_for('mainPage'))
             else:
-                flash("Invalid Password/Name Length!",'error')
+                flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
                 return redirect(url_for("loginPage"))
         else:
             flash("Please login first!","error")
@@ -259,7 +259,7 @@ def registerPageComplete():
             username = form.name.data
             password = form.password.data
             print(username,password)
-            flash("Error creating an Account.","error")
+            flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
             return render_template('register.html',form = form)
     else:
         return redirect(url_for("mainPage"))
@@ -402,10 +402,10 @@ def update():
                 flash("Update Successful!",'success')
                 return redirect(url_for("viewerPage"))
             else:
+                flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
                 return redirect(url_for("viewerPage"))
 
         else:
-            flash("Action unsuccessful!",'error')
             return redirect(url_for("viewerPage"))
     else:
         flash("Please login first!","danger")
@@ -445,7 +445,7 @@ def feedbackPageComplete():
                 position = name_check.position
                 feedback_entry = Feedback_Entry(user_id = int(user_id),username = username,rating = rating,category = category,feedback = feedback, position = position)
                 add_feedback(feedback_entry)
-                flash("Comment added successfully",'success')
+                flash("Feedback added successfully",'success')
                 return redirect(url_for("mainPage"))
             else:
                 flash("Complete the form before submitting!",'error')
