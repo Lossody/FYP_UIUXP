@@ -30,3 +30,7 @@ h6:hover {
     color: #c6a85b!important;
     transition: 0.5s;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}

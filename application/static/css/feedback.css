@@ -154,3 +154,7 @@ li a {
   padding: 38px 1.5px!important;
   height: 100px!important;
 }
+
+::-webkit-scrollbar {
+  display:none;
+}

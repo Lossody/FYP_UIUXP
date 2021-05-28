@@ -12,3 +12,7 @@
 .success{
     color:green;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}
