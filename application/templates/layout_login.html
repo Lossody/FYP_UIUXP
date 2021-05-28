@@ -19,14 +19,16 @@
         {% block content %}
         {% endblock %}
         <!-- This line generate the error -->
+        <div class = "text-center">
         {% with messages = get_flashed_messages(with_categories=true)%}
                     {% if messages %}
                         {% for category, message in messages %}
-                        <div class = "text-center text-danger">
+                        <div class = "{{ category }} pt-3 pb-3 mb-5" id="error_message">
                             {{ message }}
                         </div>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+        </div>
     </body>
 </html>
