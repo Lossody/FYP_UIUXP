@@ -142,3 +142,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0 !important;
   margin-bottom: .5rem !important;
 }
+
+.flex-row {
+  -ms-flex-direction: row !important;
+  flex-direction: row !important;
+  margin-top: 5px !important;
+}
