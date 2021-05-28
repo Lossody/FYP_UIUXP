@@ -117,7 +117,7 @@ def emptyFiller(labels,values):
             values.insert(4,0)
 
 
-# This section is for the statistics page, only CEO, Secretary and Employer.
+# This section is for the statistics page, only CEO, Secretary.
 @app.route('/statistic')
 def statisticPage():
     if "user" in session:
@@ -138,12 +138,14 @@ def statisticPage():
             result = db.engine.execute(sql)
             values = [row[1] for row in result]
 
+            ## Variables to be used for determining highest and lowest topic counts
             count = 0
             biggestNum = 0
             biggestNumCount = 0
             lowestNum = 1000000
             lowestNumCount = 0
 
+            ## If data from database is not empty calculate highest and lowest topic counts
             if len(values) != 0:
                 dataBoolean = True
                 
