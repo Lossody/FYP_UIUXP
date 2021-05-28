@@ -72,9 +72,13 @@ def loginPageComplete():
                 name_check = Login_Entry.query.filter_by(username = name).first()
                 # Checks if the user exists
                 if name_check is None:
+                    print("User does not exist")
                     flash("User does not exist!","danger")
                     return render_template("Login.html",form = form)
+                # If the user does not exist
                 else:
+                    print("Correct Password: ",name_check.password)
+                    print("User Password: ",password)
                     name_password = name_check.password
                     #If the user exists, check if the password is correct
                     if name_password != password:
@@ -85,6 +89,9 @@ def loginPageComplete():
                         user_id = name_check.id
                         session['user'] = user_id
                         return redirect(url_for('mainPage'))
+            else:
+                flash("Invalid Password/Name Length!")
+                return redirect(url_for("loginPage"))
         else:
             flash("Please login first!","danger")
             return redirect(url_for("loginPage"))
@@ -443,10 +450,10 @@ def feedbackPageComplete():
                 feedback_entry = Feedback_Entry(user_id = int(user_id),username = username,rating = rating,category = category,feedback = feedback, position = position)
                 add_feedback(feedback_entry)
                 flash("Comment added successfully")
-                return redirect(url_for("feedbackPage"))
+                return redirect(url_for("mainPage"))
             else:
                 flash("Complete the form before submitting!")
-                return redirect(url_for("feedbackPage"))
+                return redirect(url_for("mainPage"))
         else:
             return redirect(url_for("feedbackPage"))
     else:
