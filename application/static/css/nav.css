@@ -29,3 +29,7 @@ ul {
 h6:hover {
     color: #c6a85b!important;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}

@@ -166,3 +166,7 @@ body {
     background-color: rgb(92, 92, 92);
     text-decoration: none;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}

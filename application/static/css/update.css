@@ -92,3 +92,7 @@ h1{
 #hider{
     display:none;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}

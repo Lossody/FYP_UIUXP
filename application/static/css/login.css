@@ -91,3 +91,7 @@ h1{
 #forget{
     text-align: right;
 }
+
+::-webkit-scrollbar {
+    display:none;
+}
