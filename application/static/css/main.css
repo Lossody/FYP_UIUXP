@@ -13,7 +13,12 @@
 .b {
     text-align: center;
     font-family: Rajdhani;
-    font-size: 40px;
+    font-size: 70px;
+    font-weight: 900;
+}
+
+h3 {
+    font-weight: 900;
 }
 
 * {
@@ -35,18 +40,18 @@ form.query button {
     float: left;
     width: 5%;
     padding: 10px;
-    background: #c6a85b;
+    background: #2196F3;
     color: white;
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
-    margin-bottom: 200px;
+    margin-bottom: 250px;
 }
   
 form.query button:hover {
-    background: gold;
-  }
+    background: #0b7dda;
+}
   
 form.query::after {
     content: "";
@@ -60,49 +65,93 @@ form.query::after {
 }
 
 .qrepeat {
-    margin-left: 463px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .answers {
     width: 775px;
     padding: 10px;
-    border: 5px solid gray;
     margin-top: 80px;
     margin-left: 463px;
     text-align: center;
+    background-color: #c6a85b;
+    color: white;
+}
+.answers:hover {
+    background-color: #9b7f3a;
 }
 
 .thirdanswer {
     width: 775px;
     padding: 10px;
-    border: 5px solid gray;
     margin-top: 80px;
     margin-left: 463px;
     text-align: center;
+    background-color: #c6a85b;
+    color: white;
+}
+
+.thirdanswer:hover {
+    background-color: #9b7f3a;
 }
 
 .more {
     margin-top: 60px;
-    color: #c6a85b;
     margin-bottom: 200px;
-    margin-left: 1013px;
+    text-align: center;
+    font-size: 25px;
 }
 
 .nextans {
     width: 775px;
     padding: 10px;
-    border: 5px solid #c6a85b;
     margin-top: 80px;
     margin-left: 463px;
     text-align: center;
+    background-color: gray;
+    color: white;
+}
+
+.nextans:hover {
+    background-color: rgb(92, 92, 92);
 }
 
 .lastans {
     width: 775px;
     padding: 10px;
-    border: 5px solid #c6a85b;
     margin-top: 80px;
     margin-left: 463px;
     margin-bottom: 200px;
     text-align: center;
+    background-color: gray;
+    color: white;
+}
+
+.lastans:hover {
+    background-color: rgb(92, 92, 92);
+}
+
+body {
+    background-image: url("../images/bgimg.PNG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.feedback {
+    width: 300px;
+    padding: 10px;
+    margin-top: 80px;
+    margin-left: 700px;
+    margin-bottom: 200px;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+}
+
+.feedback:hover {
+    background-color: rgb(92, 92, 92);
+    text-decoration: none;
 }
