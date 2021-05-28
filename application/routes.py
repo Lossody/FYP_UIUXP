@@ -123,7 +123,7 @@ def statisticPage():
         name_check = Login_Entry.query.filter_by(id = user).first()
         role = name_check.position
         print("Role:",role)
-        if role == "C" or role == "S" or role == "ER":
+        if role == "C" or role == "S":
             
             ## -------------------------- GRAPH FOR TOPICS CLARIFICATION ---------------------------------
             ## Query to database to get each category and the total count of each
