@@ -126,7 +126,7 @@ def statisticPage():
         name_check = Login_Entry.query.filter_by(id = user).first()
         role = name_check.position
         print("Role:",role)
-        if role == "C" or role == "S" or role == "ER":
+        if role == "C" or role == "S":
             
             ## -------------------------- GRAPH FOR TOPICS CLARIFICATION ---------------------------------
             ## Query to database to get each category and the total count of each
@@ -144,21 +144,27 @@ def statisticPage():
             lowestNum = 1000000
             lowestNumCount = 0
 
-            ## For loop to display highest and lowest feedback count for topics clarification
-            for num in values:
-                if biggestNum < num:
-                    biggestNum = num
-                if lowestNum > num:
-                    lowestNum = num
+            if len(values) != 0:
+                dataBoolean = True
                 
-            for x in values:
-                if x == biggestNum:
-                    biggestNumCount = count
-                   
-                if x == lowestNum:
-                    lowestNumCount = count
+                 ## For loop to display highest and lowest feedback count for topics clarification
+                for num in values:
+                    if biggestNum < num:
+                        biggestNum = num
+                    if lowestNum > num:
+                        lowestNum = num
                     
-                count += 1
+                for x in values:
+                    if x == biggestNum:
+                        biggestNumCount = count
+                    
+                    if x == lowestNum:
+                        lowestNumCount = count
+                        
+                    count += 1
+            
+            else:
+                dataBoolean = False
 
             
 
@@ -175,7 +181,6 @@ def statisticPage():
 
             ## Execute empty filler func
             emptyFiller(labels1,values1)
-            print(values1)
      
             ## Grouping by employer
             sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "ER" GROUP BY rating,position')
@@ -188,7 +193,6 @@ def statisticPage():
             
            ## Execute empty filler func
             emptyFiller(labels2,values2)
-            print(values2)
             
             ## Grouping by secretary
             sql = text('SELECT rating, COUNT(*) AS `count`, position FROM Feedback_Table where position = "S" GROUP BY rating,position')
@@ -200,12 +204,11 @@ def statisticPage():
             labels3 = [row[0] for row in result]
 
             emptyFiller(labels3,values3)
-            print(values3)
                  
             return render_template('statistics.html', labels = labels, values=values, 
              values1=values1, values2=values2, values3=values3,
              biggestNumCount = biggestNumCount, biggestNum = biggestNum, 
-             lowestNumCount = lowestNumCount, title = "Data Statistics")
+             lowestNumCount = lowestNumCount, dataBoolean=dataBoolean, title = "Data Statistics")
         else:
             flash("Permission denied, seek higher up for assistance.",'error')
             return redirect(url_for("mainPage"))
@@ -403,7 +406,7 @@ def update():
                 return redirect(url_for("viewerPage"))
             else:
                 flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
-                return redirect(url_for("updaterPage"))
+                return redirect(url_for("viewerPage"))
 
         else:
             return redirect(url_for("viewerPage"))
