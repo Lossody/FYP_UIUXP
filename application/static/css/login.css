@@ -89,5 +89,14 @@ h1{
     top: -10px;
 }
 #forget{
+<<<<<<< HEAD
+    margin-left:140px;
+    
+=======
     text-align: right;
+}
+
+::-webkit-scrollbar {
+    display:none;
+>>>>>>> e98d0a532aabd8d18352074e782de71b74a0bd40
 }
