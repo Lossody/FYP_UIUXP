@@ -445,7 +445,7 @@ def feedbackPageComplete():
                 position = name_check.position
                 feedback_entry = Feedback_Entry(user_id = int(user_id),username = username,rating = rating,category = category,feedback = feedback, position = position)
                 add_feedback(feedback_entry)
-                flash("Comment added successfully",'success')
+                flash("Feedback added successfully",'success')
                 return redirect(url_for("mainPage"))
             else:
                 flash("Complete the form before submitting!",'error')

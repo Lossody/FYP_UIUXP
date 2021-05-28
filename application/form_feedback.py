@@ -4,6 +4,6 @@ from wtforms.validators import Length, InputRequired , ValidationError , NumberR
 
 class FeedbackForm(FlaskForm):
     stars = RadioField('Stars',choices=[('1','Very Unsatisifed'),('2','UnSatisfied'),('3','Somewhat Satisifed'),('4','Satisfied'),('5','Very Satisfied')],validators = [InputRequired()])
-    category = SelectField('Password',choices=[('A','A'),('B','B'),('C','C')],validators = [InputRequired()])
+    category = SelectField('Password',choices=[('A','Leave and time off benefits'),('B','Meal and break periods'),('C','Timekeeping and pay')],validators = [InputRequired()])
     feedback = StringField('feedback',validators = [Length(1,300)])
     submit = SubmitField("Submit")
