@@ -165,4 +165,5 @@ body {
 .feedback:hover {
     background-color: rgb(92, 92, 92);
     text-decoration: none;
+    transition: 0.5s;
 }
