@@ -12,13 +12,16 @@
 <div>
     <h4 class="b">Query:</h4>
     <br>
-    <form class="query" action="/main" style="margin:auto;max-width:1500px">
-        <input type="text" placeholder="Type your question here" name="search" required="">
-        <button type="submit">Search<i class="fa fa-search"></i></button>
+    <form class="query" action="/answers" style="margin:auto;max-width:1500px" method = "POST">
+        {{ form.hidden_tag() }}
+        {{ form.query(type="text",placeholder="Type your question here") }}
+        {{ form.search(type="submit",class="searcher")}}
+        <!-- <input type="text" placeholder="Type your question here" name="search" required="">
+        <button type="submit">Search<i class="fa fa-search"></i></button> -->
     </form>
 </div>
 <div class="qrepeat">
-    <p><strong>Question: What is AV Intelligence?</strong></p>
+    <p><strong>Question: {{ question }}</strong></p>
 </div>
 <div class="answers">
     <a href="https://av-intelligence.com/" style="color: white;" target="_blank"><strong>Answer 1</strong><br>It is available at https//av-intelligence.com/</a>

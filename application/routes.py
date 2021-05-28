@@ -5,6 +5,7 @@ from application.form_login import LoginForm
 from application.form_register import RegisterForm
 from application.form_update import UpdateForm
 from application.form_feedback import FeedbackForm
+from application.form_query import QueryForm
 # This line import the login table
 from application.login_model import Login_Entry
 from application.feedback_model import Feedback_Entry
@@ -29,32 +30,58 @@ def loginPage():
 # This section is for the Main page, any people can access it.
 @app.route('/main')
 def mainPage():
+    try:
+        session.pop('more_question',None)
+    except: 
+        pass
     if "user" in session:
         user = session["user"]
-        print(user)
-        return render_template('main.html', title="Main")
+        form = QueryForm()
+        return render_template('main.html', title="Main", form = form)
     else:
         flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 # This section is for the Answers page, any people can access it.
-@app.route('/answers')
+@app.route('/answers',methods = ["POST","GET"])
 def answersPage():
     if "user" in session:
-        user = session["user"]
-        print(user)
-        return render_template('answers.html', title="Answers")
+        form = QueryForm()
+        if request.method == "POST":
+            if form.validate_on_submit() == True:
+                question = form.query.data
+                session['more_question'] = question
+                return render_template('answers.html', title="Answers",question = question,form = form)
+            else:
+                flash("Please fill in the form!",'error')
+                return redirect(url_for("mainPage"))
+        else:
+            flash("Please fill in the form!",'error')
+            return redirect(url_for("mainPage"))
     else:
         flash("Please login first!","error")
         return redirect(url_for("loginPage"))
 
 # This section is for the More Answers page, any people can access it.
-@app.route('/moreanswers')
+@app.route('/moreanswers',methods = ["POST","GET"])
 def moreanswersPage():
     if "user" in session:
-        user = session["user"]
-        print(user)
-        return render_template('moreanswers.html', title="More Answers")
+        form = QueryForm()
+        if request.method == "POST":
+            if form.validate_on_submit() == True:
+                question = form.query.data
+                return render_template('moreanswers.html', title="MoreAnswers",question = question,form = form)
+            else:
+                flash("Please fill in the form!",'error')
+                return redirect(url_for("mainPage"))
+        else:
+            print("Error check")
+            if "more_question" in session:
+                question = session['more_question']
+                return render_template('moreanswers.html', title="MoreAnswers",question = question,form = form)
+            else:
+                flash("Please fill in the form!",'error')
+                return redirect(url_for("mainPage"))
     else:
         flash("Please login first!","error")
         return redirect(url_for("loginPage"))
