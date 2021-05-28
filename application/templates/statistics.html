@@ -26,11 +26,16 @@
     <div class = "row mt-5">
         <div class = "col-md-7">
             <h3 class = "text-center">Topics that need clarification</h3><br>
-            <h5 class = "text-center">&#8226;{{labels[biggestNumCount]}} is the most misunderstood topic with total of {{biggestNum}} feedbacks</h5><br>
-            <h5 class = "text-center">&#8226;{{labels[lowestNumCount]}} has relatively lower doubts among the employees as compared to other topics</h5>
+            {% if dataBoolean == True %}
+            <h5 class = "text-center">&#8226;  <strong>{{labels[biggestNumCount]}}</strong> is the most misunderstood topic with total of {{biggestNum}} feedbacks</h5><br>
+            <h5 class = "text-center">&#8226;  <strong>{{labels[lowestNumCount]}}</strong> has relatively lower doubts among the employees as compared to other topics</h5>
+            {% else %}
+            <h4 class = "text-center mt-3">No Data</h4>
+            {% endif %}
+            
         </div>
         <div class = "col-md-5">
-            <canvas id="barGraph" width="440" height="400"></canvas>
+            <canvas id="barGraph" width="550" height="400"></canvas>
             <script>
                var ctx = document.getElementById("barGraph").getContext("2d");
                var barGraph = new Chart(ctx, {
@@ -41,8 +46,8 @@
                            {
                                label: "Feedback Count",
                                data: {{ values | safe}},
-                               barThickness: 40,
-                               maxBarThickness: 80,
+                               barThickness: 75,
+                               maxBarThickness: 120,
                                minBarLength: 2,
                                backgroundColor: 'rgba(255, 159, 64, 0.6)'
                                
