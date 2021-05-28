@@ -86,7 +86,7 @@ def loginPageComplete():
                         session['user'] = user_id
                         return redirect(url_for('mainPage'))
             else:
-                flash("Invalid Password/Name Length!",'error')
+                flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
                 return redirect(url_for("loginPage"))
         else:
             flash("Please login first!","error")
@@ -259,7 +259,7 @@ def registerPageComplete():
             username = form.name.data
             password = form.password.data
             print(username,password)
-            flash("Error creating an Account.","error")
+            flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
             return render_template('register.html',form = form)
     else:
         return redirect(url_for("mainPage"))
@@ -405,7 +405,7 @@ def update():
                 return redirect(url_for("viewerPage"))
 
         else:
-            flash("Action unsuccessful!",'error')
+            flash("Error. Make sure your username/password is above 4 characters( Excluding space and special characters! )","error")
             return redirect(url_for("viewerPage"))
     else:
         flash("Please login first!","danger")
